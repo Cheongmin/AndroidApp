@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#845eF7</color>
-    <color name="colorPrimaryDark">#7048e8</color>
+    <color name="colorPrimary">@color/colorViolet5</color>
+    <color name="colorPrimaryDark">@color/colorViolet7</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorWhite">#FFFFFF</color>
 
+    <color name="colorGray0">#f8f9fa</color>
+    <color name="colorGray1">#f1f3f5</color>
+    <color name="colorGray2">#e9ecef</color>
+    <color name="colorGray3">#dee2e6</color>
+    <color name="colorGray4">#ced4da</color>
     <color name="colorGray5">#adb5bd</color>
+    <color name="colorGray6">#868e96</color>
+    <color name="colorGray7">#495057</color>
+    <color name="colorGray8">#343a40</color>
+    <color name="colorGray9">#212529</color>
 
+    <color name="colorViolet0">#f3f0ff</color>
+    <color name="colorViolet1">#e5dbff</color>
+    <color name="colorViolet2">#d0bfff</color>
+    <color name="colorViolet3">#b197fc</color>
+    <color name="colorViolet4">#9775fa</color>
+    <color name="colorViolet5">#845ef7</color>
+    <color name="colorViolet6">#7950f2</color>
+    <color name="colorViolet7">#7048e8</color>
+    <color name="colorViolet8">#6741d9</color>
     <color name="colorViolet9">#5f3dc4</color>
 </resources>
