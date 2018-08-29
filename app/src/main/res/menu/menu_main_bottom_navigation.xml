@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_home"
+        android:title="홈"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom">
+    </item>
+    <item android:id="@+id/action_log"
+        android:title="연습 기록"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu"
+        app:showAsAction="ifRoom">
+    </item>
+    <item android:id="@+id/action_setting"
+        android:title="설정"
+        android:enabled="true"
+        android:icon="@drawable/ic_setting"
+        app:showAsAction="ifRoom">
+    </item>
+</menu>
