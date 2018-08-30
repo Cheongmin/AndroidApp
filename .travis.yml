@@ -33,4 +33,4 @@ branches:
 notifications:
   slack:
     rooms:
-      - soundright:S3MSovZcyt8SLApWT8wmSYW5#general
+      - soundright:S3MSovZcyt8SLApWT8wmSYW5#development
