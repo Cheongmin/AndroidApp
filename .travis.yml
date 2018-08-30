@@ -25,6 +25,14 @@ cache:
 script:
     - ./gradlew build
 
+deploy:
+    provider: script
+    script: "sh deploy.sh"
+    on:
+        branch:
+            - dev
+            - master
+
 branches:
     only:
         - develop
