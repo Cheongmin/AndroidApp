@@ -1,5 +1,5 @@
 language: android
-
+sudo: required
 jdk:
     - oraclejdk8
 
@@ -19,3 +19,4 @@ script:
 branches:
     only:
         - develop
+        - master
