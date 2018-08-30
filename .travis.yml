@@ -29,3 +29,8 @@ branches:
     only:
         - develop
         - master
+
+notifications:
+  slack:
+    rooms:
+      - soundright:S3MSovZcyt8SLApWT8wmSYW5#general
