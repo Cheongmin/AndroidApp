@@ -16,6 +16,10 @@ before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 
+before_install:
+  - chmod +x gradlew
+  - chmod +rx app
+
 cache:
   directories:
   - $HOME/.gradle/caches/
