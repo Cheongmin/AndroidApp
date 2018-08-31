@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export DEPLOY_BRANCH="$TRAVIS_BRANCH"
 export DEPLOY_COMMIT="$TRAVIS_COMMIT"
 
