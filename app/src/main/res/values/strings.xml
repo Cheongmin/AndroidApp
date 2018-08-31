@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Voice Reader</string>
+    <string name="app_name">보리</string>
 
     <string name="main_bottom_navigation_home">홈</string>
     <string name="main_bottom_navigation_log">연습 기록</string>
