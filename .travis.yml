@@ -27,7 +27,7 @@ script:
 
 deploy:
     provider: script
-    script: "sh deploy.sh"
+    script: "sh script/deploy.sh"
     on:
         branch:
             - develop
