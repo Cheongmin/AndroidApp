@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolBar)
 
         supportActionBar?.run {
             setDisplayShowTitleEnabled(true)
