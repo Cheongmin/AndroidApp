@@ -7,6 +7,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="PostQuestion">질문하기</string>
-    <string name="PostAnswer">답변하기</string>
+    <string name="post_question">질문하기</string>
+    <string name="post_answer">답변하기</string>
+    <string name="post_question_title_hint">제목을 입력해주세요</string>
+    <string name="post_question_content_hint">피드백 받고 싶은 부분에 대해 입력해주세요</string>
 </resources>

@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/style_flat_edit_text"
-        android:hint="제목을 입력해주세요"
+        android:hint="@string/post_question_title_hint"
         android:padding="8dp"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,10 +38,13 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@color/colorGray3"
-        app:layout_constraintTop_toBottomOf="@+id/edit_title"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_title" />
 
     <EditText
         android:id="@+id/edit_content"
@@ -53,13 +56,34 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/style_flat_edit_text"
         android:gravity="top"
-        android:hint="피드백 받고 싶은 부분에 대해 입력해주세요"
+        android:hint="@string/post_question_content_hint"
+        android:inputType="textMultiLine|textWebEditText"
         android:padding="8dp"
         android:singleLine="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layout_record"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
+    <LinearLayout
+        android:id="@+id/layout_record"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_start_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            녹음
+        </Button>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

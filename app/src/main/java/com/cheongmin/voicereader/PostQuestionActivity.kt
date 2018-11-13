@@ -2,7 +2,7 @@ package com.cheongmin.voicereader
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_post_question.*
 
 class PostQuestionActivity : AppCompatActivity() {
 
@@ -17,9 +17,9 @@ class PostQuestionActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar?.run {
-            title="질문하기"
+            title = "질문하기"
             setDisplayShowTitleEnabled(true)
-            setDisplayHomeAsUpEnabled(false)
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 }
