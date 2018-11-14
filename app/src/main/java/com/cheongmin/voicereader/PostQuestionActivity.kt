@@ -2,10 +2,8 @@ package com.cheongmin.voicereader
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_post_question.*
 
@@ -16,6 +14,12 @@ class PostQuestionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_post_question)
 
         setupActionBar()
+
+        //TODO: dialog 결과(음성 파일, STT를 통해 인식된 내용)을 받아와야함
+        btn_show_record_dialog.setOnClickListener {
+            val dialog = RecordDialog()
+            dialog.show(supportFragmentManager, dialog.tag)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -63,11 +63,12 @@
         app:layout_constraintTop_toBottomOf="@+id/divide_line">
 
         <Button
-            android:id="@+id/btn_start_animation"
+            android:id="@+id/btn_show_record_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:text="음성 녹음하기">
+            android:drawableStart="@drawable/ic_mic_black_24dp"
+            android:text="@string/post_question_upload">
         </Button>
 
     </LinearLayout>
