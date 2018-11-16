@@ -65,7 +65,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
             android:background="@drawable/style_rounded_gray_background">
 
             <Button
@@ -75,12 +74,13 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_mic_black_24dp"
                 android:text="@string/post_question_upload" />
+
         </LinearLayout>
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_player"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_weight="1.0"
+            android:layout_height="0dp"
             android:background="@drawable/style_rounded_gray_background">
 
             <View
@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <SeekBar
-                android:id="@+id/seekBar"
+                android:id="@+id/sb_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -104,12 +104,12 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintEnd_toStartOf="@+id/tv_play_time"
                 app:layout_constraintStart_toEndOf="@+id/view_record_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_play_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -120,17 +120,17 @@
                 android:textColor="@color/colorGray6"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button"
+                app:layout_constraintEnd_toStartOf="@+id/btn_play"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/button"
+            <ImageButton
+                android:id="@+id/btn_play"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="P/S"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
