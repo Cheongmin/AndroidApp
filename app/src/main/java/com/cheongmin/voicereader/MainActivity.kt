@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,16 @@ class MainActivity : AppCompatActivity() {
         setupProfile()
         setupWelcomeMessage()
         setupInformation()
+
+        btn_show_post_answer.setOnClickListener {
+            val intent = Intent(this, PostAnswerActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_show_post_question.setOnClickListener {
+            val intent = Intent(this, PostQuestionActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupActionBar() {

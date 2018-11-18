@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_post_question.*
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class PostQuestionActivity : AppCompatActivity() {
 
@@ -46,5 +47,10 @@ class PostQuestionActivity : AppCompatActivity() {
             setDisplayShowTitleEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
