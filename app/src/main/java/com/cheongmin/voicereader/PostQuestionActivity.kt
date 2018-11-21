@@ -21,6 +21,8 @@ class PostQuestionActivity : AppCompatActivity() {
             val dialog = RecordDialog()
             dialog.show(supportFragmentManager, dialog.tag)
         }*/
+
+        sound_player.subtitles = "안녕하세요\n자막입니다"
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

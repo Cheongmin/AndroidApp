@@ -68,6 +68,7 @@
         </LinearLayout>
 
         <com.cheongmin.voicereader.SoundPlayer
+            android:id="@+id/sound_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
