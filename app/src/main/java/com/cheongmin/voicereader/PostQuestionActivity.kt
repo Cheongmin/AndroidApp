@@ -17,10 +17,10 @@ class PostQuestionActivity : AppCompatActivity() {
         setupActionBar()
 
         //TODO: dialog 결과(음성 파일, STT를 통해 인식된 내용)을 받아와야함
-        btn_show_record_dialog.setOnClickListener {
+        /*btn_show_record_dialog.setOnClickListener {
             val dialog = RecordDialog()
             dialog.show(supportFragmentManager, dialog.tag)
-        }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
