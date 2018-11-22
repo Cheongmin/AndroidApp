@@ -28,7 +28,7 @@ class SoundPlayer
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_sound_player, this, true)
 
-        setupEvents()
+        setupControllers()
         setupProgressBar()
     }
 
@@ -50,7 +50,7 @@ class SoundPlayer
         })
     }
 
-    private fun setupEvents() {
+    private fun setupControllers() {
         btn_toggle_subtitle.setOnClickListener {
             toggleSubtitle()
         }
