@@ -27,9 +27,6 @@ class SoundPlayer
             tv_subtitles.text = value
         }
 
-    private val expandedSubtitleLayoutHeight : Int =
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100.0f, resources.displayMetrics).toInt()
-
     private var isExpanded = false
 
     init {
