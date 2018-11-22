@@ -19,7 +19,7 @@ class RetrofitTestActivity : AppCompatActivity(){
 
         btn_request.setOnClickListener {
             val apiClient = RetrofitManager.create(UserService::class.java)
-            apiClient.newUsers("gamgule")
+            apiClient.fetchUser("5bf4178ef22eb600016403db")
                     .enqueue(object: Callback<User> {
                         override fun onResponse(call: Call<User>, response: Response<User>) {
                             Log.d("Retrofit", "call onResponse")
@@ -30,6 +30,7 @@ class RetrofitTestActivity : AppCompatActivity(){
                         }
                         override fun onFailure(call: Call<User>, t: Throwable) {
                             Log.d("Retrofit", "call onFailure")
+                            t.printStackTrace()
                         }
                     })
         }

@@ -26,5 +26,5 @@ interface UserService {
     fun fetchUser(
             @Path("userid")
             userid: String
-    )
+    ) : Call<User>
 }

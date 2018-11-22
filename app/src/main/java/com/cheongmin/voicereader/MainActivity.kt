@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
                         Log.d("Retrofit", "call onResponse")
                         Log.d("Retrofit", response.message())
+                        Log.d("Retrofit", response.body().toString())
                         if (response.isSuccessful) {
                             for (question in response.body().orEmpty()) {
                                 Log.d("Retrofit", question.contents)
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     override fun onFailure(call: Call<List<Question>>, t: Throwable) {
                         Log.d("Retrofit", "call onFailure")
+                        t.printStackTrace()
                     }
                 })
     }
