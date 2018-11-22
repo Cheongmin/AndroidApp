@@ -11,4 +11,5 @@
     <string name="dialog_record_tip">인식된 내용이 아래에 표시됩니다</string>
 
     <string name="time_placeholder">%1$02d:%2$02d</string>
+    <string name="time_start">00:00</string>
 </resources>
