@@ -3,6 +3,7 @@ package com.cheongmin.voicereader.Network
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.cheongmin.voicereader.Model.NewUserRequest
 import com.cheongmin.voicereader.Model.User
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.Service.UserService
@@ -19,7 +20,7 @@ class RetrofitTestActivity : AppCompatActivity(){
 
         btn_request.setOnClickListener {
             val apiClient = RetrofitManager.create(UserService::class.java)
-            apiClient.fetchUser("5bf4178ef22eb600016403db")
+            apiClient.newUsers(NewUserRequest("gamgule"))
                     .enqueue(object: Callback<User> {
                         override fun onResponse(call: Call<User>, response: Response<User>) {
                             Log.d("Retrofit", "call onResponse")

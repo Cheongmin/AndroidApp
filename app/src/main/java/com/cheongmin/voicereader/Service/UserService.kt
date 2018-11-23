@@ -1,5 +1,6 @@
 package com.cheongmin.voicereader.Service
 
+import com.cheongmin.voicereader.Model.NewUserRequest
 import com.cheongmin.voicereader.Model.Question
 import com.cheongmin.voicereader.Model.User
 import retrofit2.Call
@@ -9,7 +10,7 @@ interface UserService {
     @POST("users")
     fun newUsers(
             @Body
-            display_name: String
+            body: NewUserRequest
     ) : Call<User>
 
     @PUT

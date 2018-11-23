@@ -1,4 +1,4 @@
-package com.cheongmin.voicereader.Network
+package com.cheongmin.voicereader.Service
 
 import com.cheongmin.voicereader.Model.Question
 import retrofit2.Call

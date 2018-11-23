@@ -3,12 +3,10 @@ package com.cheongmin.voicereader
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
-import android.widget.Toast
 import com.cheongmin.voicereader.Model.Question
 import com.cheongmin.voicereader.Network.RetrofitManager
-import com.cheongmin.voicereader.Network.VoiceReaderService
+import com.cheongmin.voicereader.Service.VoiceReaderService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
