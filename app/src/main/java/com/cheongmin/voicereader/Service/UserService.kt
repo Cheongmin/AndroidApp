@@ -1,26 +1,29 @@
 package com.cheongmin.voicereader.Service
 
-import com.cheongmin.voicereader.Model.NewUserRequest
-import com.cheongmin.voicereader.Model.Question
+import com.cheongmin.voicereader.Model.UserRequest
 import com.cheongmin.voicereader.Model.User
 import retrofit2.Call
 import retrofit2.http.*
 
 interface UserService {
-    @POST("users")
+    @POST("users/")
     fun newUsers(
             @Body
-            body: NewUserRequest
+            body: UserRequest
     ) : Call<User>
 
-    @PUT
+    @PUT("users/{userid}")
     fun updateUser(
+            @Path("userid")
+            userid: String,
+            @Body
+            body: UserRequest
+    ) : Call<Void>
 
-    )
-
-    @POST
+    @POST("users/{userid}")
     fun uploadUserPhoto(
-
+            @Path("userid")
+            userid: String
     )
 
     @GET("users/{userid}")
