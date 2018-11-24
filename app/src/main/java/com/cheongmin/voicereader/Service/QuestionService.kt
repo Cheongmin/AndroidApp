@@ -3,12 +3,18 @@ package com.cheongmin.voicereader.Service
 import com.cheongmin.voicereader.Model.Answer
 import com.cheongmin.voicereader.Model.AnswerRequest
 import com.cheongmin.voicereader.Model.Question
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface QuestionService {
+    @Multipart
     @POST("questions")
     fun newQuestion(
+            @Part
+            sound: MultipartBody.Part,
+            @Part
+            json: MultipartBody.Part
     ) : Call<Question>
 
     @GET("questions")

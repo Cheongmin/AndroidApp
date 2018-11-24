@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
-    private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com:5000/api/v1/"
+    private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com/api/v1/"
 
     private var retrofit: Retrofit
 
