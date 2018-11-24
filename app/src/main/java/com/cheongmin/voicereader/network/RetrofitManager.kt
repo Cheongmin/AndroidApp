@@ -33,9 +33,9 @@ object RetrofitManager {
         }.build()
     }
 
-    fun accessTokenProvidingInterceptor() = Interceptor { chain ->
+    fun accessTokenProvidingInterceptor(token: String?) = Interceptor { chain ->
         chain.proceed(chain.request().newBuilder()
-                .addHeader("Authorization", ACCESS_TOKEN)
+                .addHeader("Authorization", token)
                 .build())
     }
 
@@ -43,15 +43,24 @@ object RetrofitManager {
         return retrofit.create(service)
     }
 
-    internal fun<T> createWithAccessToken(service: Class<T>): T {
+    internal fun<T> createWithToken(service: Class<T>, token: String?): T {
         return Retrofit.Builder().apply {
             client(OkHttpClient.Builder().apply {
-                addInterceptor(accessTokenProvidingInterceptor())
+                addInterceptor(accessTokenProvidingInterceptor(token))
             }.build())
             baseUrl(API_HOST)
             addConverterFactory(GsonConverterFactory.create())
         }.build().create(service)
     }
 
+    internal fun<T> createWithBearerToken(service: Class<T>, token: String?): T {
+        return Retrofit.Builder().apply {
+            client(OkHttpClient.Builder().apply {
+                addInterceptor(accessTokenProvidingInterceptor("Bearer " + token))
+            }.build())
+            baseUrl(API_HOST)
+            addConverterFactory(GsonConverterFactory.create())
+        }.build().create(service)
+    }
 
 }

@@ -19,6 +19,9 @@
         <activity android:name=".PostQuestionActivity"></activity>
         <activity android:name=".PostAnswerActivity"></activity>
         <activity android:name=".network.RetrofitTestActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

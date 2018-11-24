@@ -3,7 +3,9 @@ package com.cheongmin.voicereader.service
 import com.cheongmin.voicereader.model.Answer
 import com.cheongmin.voicereader.model.AnswerRequest
 import com.cheongmin.voicereader.model.Question
+import com.cheongmin.voicereader.model.QuestionRequest
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 

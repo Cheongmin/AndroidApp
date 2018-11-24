@@ -23,6 +23,8 @@ class RetrofitTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrofit)
+    }
+}
 
         /*btn_request.setOnClickListener {
             val apiClient = RetrofitManager.create(UserService::class.java)
@@ -41,7 +43,8 @@ class RetrofitTestActivity : AppCompatActivity() {
                             t.printStackTrace()
                         }
                     })
-        }*/
+        }
+
 
         val file = File("/storage/emulated/0/Download/1.wav")
         val sound = MultipartBody.Part.createFormData("sound", file.getName(), RequestBody.create(MediaType.parse("audio/*"), file))
@@ -64,4 +67,4 @@ class RetrofitTestActivity : AppCompatActivity() {
                     })
         }
     }
-}
+}*/
