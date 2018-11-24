@@ -4,9 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.cheongmin.voicereader.Model.Question
-import com.cheongmin.voicereader.Network.RetrofitManager
-import com.cheongmin.voicereader.Service.VoiceReaderService
+import com.cheongmin.voicereader.model.Question
+import com.cheongmin.voicereader.network.RetrofitManager
+import com.cheongmin.voicereader.service.VoiceReaderService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*

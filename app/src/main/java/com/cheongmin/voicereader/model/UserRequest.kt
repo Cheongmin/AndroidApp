@@ -1,4 +1,4 @@
-package com.cheongmin.voicereader.Model
+package com.cheongmin.voicereader.model
 
 import com.google.gson.annotations.SerializedName
 

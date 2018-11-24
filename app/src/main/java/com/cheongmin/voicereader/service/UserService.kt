@@ -1,7 +1,7 @@
-package com.cheongmin.voicereader.Service
+package com.cheongmin.voicereader.service
 
-import com.cheongmin.voicereader.Model.UserRequest
-import com.cheongmin.voicereader.Model.User
+import com.cheongmin.voicereader.model.UserRequest
+import com.cheongmin.voicereader.model.User
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
