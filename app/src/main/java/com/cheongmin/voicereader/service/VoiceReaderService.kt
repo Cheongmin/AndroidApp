@@ -1,6 +1,6 @@
-package com.cheongmin.voicereader.Service
+package com.cheongmin.voicereader.service
 
-import com.cheongmin.voicereader.Model.Question
+import com.cheongmin.voicereader.model.Question
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

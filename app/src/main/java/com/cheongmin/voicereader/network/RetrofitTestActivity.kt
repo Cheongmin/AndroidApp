@@ -1,23 +1,15 @@
-package com.cheongmin.voicereader.Network
+package com.cheongmin.voicereader.network
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.cheongmin.voicereader.Model.Question
-import com.cheongmin.voicereader.Model.QuestionRequest
-import com.cheongmin.voicereader.Model.User
-import com.cheongmin.voicereader.Model.UserRequest
+import com.cheongmin.voicereader.model.User
 import com.cheongmin.voicereader.R
-import com.cheongmin.voicereader.Service.QuestionService
-import com.cheongmin.voicereader.Service.UserService
+import com.cheongmin.voicereader.service.UserService
 import kotlinx.android.synthetic.main.activity_retrofit.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 
 
 class RetrofitTestActivity : AppCompatActivity() {
