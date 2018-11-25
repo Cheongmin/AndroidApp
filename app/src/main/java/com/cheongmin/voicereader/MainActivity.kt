@@ -35,25 +35,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PostQuestionActivity::class.java)
             startActivity(intent)
         }
-
-        val apiClient = RetrofitManager.create(VoiceReaderService::class.java)
-        apiClient.fetchQuestions(0, 3)
-                .enqueue(object: Callback<List<Question>> {
-                    override fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
-                        Log.d("Retrofit", "call onResponse")
-                        Log.d("Retrofit", response.message())
-                        Log.d("Retrofit", response.body().toString())
-                        if (response.isSuccessful) {
-                            for (question in response.body().orEmpty()) {
-                                Log.d("Retrofit", question.contents)
-                            }
-                        }
-                    }
-                    override fun onFailure(call: Call<List<Question>>, t: Throwable) {
-                        Log.d("Retrofit", "call onFailure")
-                        t.printStackTrace()
-                    }
-                })
     }
 
     private fun setupActionBar() {

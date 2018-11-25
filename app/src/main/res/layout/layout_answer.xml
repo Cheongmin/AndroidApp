@@ -7,16 +7,17 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_question_user_profile"
+        android:id="@+id/iv_user_profile"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:background="#ff0000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_question_user_name"
+        android:id="@+id/tv_user_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,23 +25,23 @@
         android:textColor="@color/colorGray9"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_question_user_profile"
-        app:layout_constraintTop_toTopOf="@+id/iv_question_user_profile" />
+        app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_user_profile" />
 
     <TextView
-        android:id="@+id/tv_question_user_location"
+        android:id="@+id/tv_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="경기도 의정부시"
         android:textColor="@color/colorGray6"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_question_user_profile"
-        app:layout_constraintStart_toEndOf="@+id/iv_question_user_profile"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question_user_name" />
+        app:layout_constraintBottom_toBottomOf="@+id/iv_user_profile"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
     <TextView
-        android:id="@+id/tv_question_date"
+        android:id="@+id/tv_submit_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -48,23 +49,23 @@
         android:textColor="@color/colorGray6"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_question_user_name" />
+        app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
 
     <TextView
-        android:id="@+id/tv_question_content"
+        android:id="@+id/tv_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:text="안녕하세요."
         android:textColor="@color/colorGray9"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question_user_location" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_profile" />
 
 </android.support.constraint.ConstraintLayout>

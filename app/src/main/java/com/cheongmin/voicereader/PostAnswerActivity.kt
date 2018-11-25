@@ -2,9 +2,15 @@ package com.cheongmin.voicereader
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.cheongmin.voicereader.adapter.AnswerAdapter
+import com.cheongmin.voicereader.model.Answer
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_post_answer.*
 import kotlinx.android.synthetic.main.include_toolbar.*
+import com.cheongmin.voicereader.R.id.scroll
+
+
 
 class PostAnswerActivity : AppCompatActivity() {
 
@@ -14,6 +20,22 @@ class PostAnswerActivity : AppCompatActivity() {
 
         setupActionBar()
         setupProfile()
+
+        setupAnswerList()
+    }
+
+    private fun setupAnswerList() {
+        val adapter = AnswerAdapter()
+
+        for (i in 0..10) {
+            adapter.addItem(Answer("000", "답변" + i.toString(), 0, "", i.toString()))
+        }
+
+        rv_answers.adapter = adapter
+
+        sv_content.post {
+            sv_content.fullScroll(View.FOCUS_UP)
+        }
     }
 
     private fun setupActionBar() {
