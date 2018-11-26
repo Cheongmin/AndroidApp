@@ -15,14 +15,14 @@
         android:id="@+id/sv_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_edit_answer"
+        app:layout_constraintBottom_toTopOf="@+id/layout_answer"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="36dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="36dp">
 
             <include
                 android:id="@+id/question_view"
@@ -32,43 +32,46 @@
                 android:id="@+id/rv_answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
         </LinearLayout>
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/tv_edit_answer"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="0dp"
-        android:background="@color/colorGray1"
-        android:gravity="center"
-        android:text="@string/edit_answer_placeholder"
-        android:textColor="@color/colorGray6"
-        android:textSize="14sp"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_post_answer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.7"
-        tools:ignore="RtlCompat" />
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_answer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/btn_post_answer"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:text="작성하기"
-        android:textSize="14dp"
-        android:textColor="@color/colorWhite"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_edit_answer"
-        app:layout_constraintWidth_percent="0.3" />
+        <EditText
+            android:id="@+id/edit_answer"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:theme="@style/VoiceReader.EditText"
+            android:background="@drawable/style_rounded_edit_text"
+            android:hint="@string/answer_placeholder"
+            android:inputType="text|textMultiLine"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_submit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/style_rounded_primary_button"
+            android:text="@string/button_post_answer"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

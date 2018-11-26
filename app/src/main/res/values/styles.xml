@@ -1,17 +1,20 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <style name="VoiceReader.SeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:progressBackgroundTint">@color/colorGray3</item>
         <item name="android:progressTint">@color/colorPrimary</item>
+        <item name="android:colorControlActivated">@color/colorPrimary</item>
+    </style>
+    
+    <style name="VoiceReader.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textCursorDrawable">@color/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/colorViolet3</item>
         <item name="android:colorControlActivated">@color/colorPrimary</item>
     </style>
 

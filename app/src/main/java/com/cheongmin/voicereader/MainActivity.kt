@@ -49,9 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupProfile() {
         //TODO: 사용자 프로필 사진의 주소를 로컬DB 혹은 서버로부터 받아오도록 수정해야함
-        Picasso.get()
-                .load("https://yt3.ggpht.com/-yOlMtZbsU4g/AAAAAAAAAAI/AAAAAAAAAAA/6W9wp1WvxIg/s76-c-k-no-mo-rj-c0xffffff/photo.jpg")
-                .into(iv_user_profile)
+        /*Picasso.get()
+                .load(R.drawable.ic_user_placeholder)
+                .into(iv_user_profile)*/
     }
 
     private fun setupWelcomeMessage() {
