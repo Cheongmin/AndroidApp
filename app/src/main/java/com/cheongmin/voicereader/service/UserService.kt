@@ -1,7 +1,10 @@
 package com.cheongmin.voicereader.service
 
+import com.cheongmin.voicereader.model.Photo
 import com.cheongmin.voicereader.model.UserRequest
 import com.cheongmin.voicereader.model.User
+import io.reactivex.Completable
+import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -11,7 +14,7 @@ interface UserService {
     fun newUsers(
             @Body
             body: UserRequest
-    ) : Call<User>
+    ) : Single<User>
 
     @PUT("users/{userid}")
     fun updateUser(
@@ -19,7 +22,7 @@ interface UserService {
             userid: String,
             @Body
             body: UserRequest
-    ) : Call<Void>
+    ) : Completable
 
     @Multipart
     @POST("users/{userid}")
@@ -28,11 +31,11 @@ interface UserService {
             userid: String,
             @Part
             photo: MultipartBody.Part
-    ) : Call<Void>
+    ) : Single<Photo>
 
     @GET("users/{userid}")
     fun fetchUser(
             @Path("userid")
             userid: String
-    ) : Call<User>
+    ) : Single<User>
 }
