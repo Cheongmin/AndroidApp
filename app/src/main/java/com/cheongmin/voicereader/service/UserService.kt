@@ -26,9 +26,9 @@ interface UserService {
     fun uploadUserPhoto(
             @Path("userid")
             userid: String,
-            @Part("photo")
+            @Part
             photo: MultipartBody.Part
-    )
+    ) : Call<Void>
 
     @GET("users/{userid}")
     fun fetchUser(

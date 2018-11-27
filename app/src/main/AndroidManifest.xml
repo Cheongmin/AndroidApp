@@ -23,6 +23,13 @@
         </activity>
         <activity android:name=".PostQuestionActivity"></activity>
         <activity android:name=".PostAnswerActivity"></activity>
+        <activity android:name=".network.RetrofitTestActivity">
+
+        </activity>
+        <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".PostQuestionActivity"></activity>
+        <activity android:name=".PostAnswerActivity"></activity>
         <activity android:name=".network.RetrofitTestActivity"></activity>
     </application>
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "701687882314",
+    "firebase_url": "https://voicereader-fe99d.firebaseio.com",
+    "project_id": "voicereader-fe99d",
+    "storage_bucket": "voicereader-fe99d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701687882314:android:fb1ca0794fcbbb92",
+        "android_client_info": {
+          "package_name": "com.cheongmin.voicereader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701687882314-ekg11gngsm1f9n91o07ehp0scejuvlpg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cheongmin.voicereader",
+            "certificate_hash": "f3f4e10c52747063ce08457138a4f46eab9bf8c5"
+          }
+        },
+        {
+          "client_id": "701687882314-q8d7ho34hhvfrcveib46gdio3gmfi6qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsyyLWDI81ASVMNujt_XlPGT7LVZDH-8s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701687882314-q8d7ho34hhvfrcveib46gdio3gmfi6qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

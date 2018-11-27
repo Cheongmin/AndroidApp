@@ -10,7 +10,7 @@ data class Answer(
         @SerializedName("created_date")
         var createdDate: Long,
         @SerializedName("question_id")
-        var soundUri: String,
+        var questionId: String,
         @SerializedName("writer_id")
         var writerId: String
 )
