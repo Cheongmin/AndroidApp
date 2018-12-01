@@ -25,9 +25,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import java.io.File
 import java.lang.Exception
 
@@ -45,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setAvailableProviders(providers)
+                            .setIsSmartLockEnabled(false)
                             .build(), RC_SIGN_IN)
         }
 
@@ -58,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
             try {
                 UserInfo.access_token = accessToken.token
                 UserInfo.login = true
+
+                Log.i("updateUserInfo", "onSuccess")
 
                 it.onSuccess(accessToken)
 
@@ -73,7 +74,23 @@ class LoginActivity : AppCompatActivity() {
         val file = File("/sdcard/DCIM/Camera/IMG_20181127_163346.jpg")
         val photo = MultipartBody.Part.createFormData("photo", file.name, RequestBody.create(MediaType.parse("image/*"), file))
 
+        Log.i("updateUserProfile", "call")
+
         return apiClient.uploadUserPhoto("5bf95d3cb53fe700018fd517", photo)
+    }
+
+    private fun getAccessToken(idToken: String) : Single<AccessToken> {
+        return Single.create { emitter ->
+            val apiClient = RetrofitManager.create(AuthorizationService::class.java)
+            apiClient.fetchAccessToken(idToken)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe ({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -82,21 +99,16 @@ class LoginActivity : AppCompatActivity() {
         if (requestCode != RC_SIGN_IN && resultCode != Activity.RESULT_OK) {
             return
         }
-        
+
         RxFirebaseAuth.getCurrentUser(FirebaseAuth.getInstance())
                 .flatMapSingle { user -> RxFirebaseUser.getIdToken(user, true) }
-                .flatMap { token ->
-                    val apiClient = RetrofitManager.createWithToken(AuthorizationService::class.java, token)
-                    return@flatMap apiClient.fetchAccessToken()
-                }
-                .flatMap { accessToken -> updateUserInfo(accessToken) }
-                .flatMap { updateUserProfile() }
+                .flatMap { idToken -> getAccessToken(idToken) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.i(it.uri, "Complete")
+                    Log.i("idToken", it.token)
                 }, {
-                    it.printStackTrace()
+                    throw it
                 })
     }
 

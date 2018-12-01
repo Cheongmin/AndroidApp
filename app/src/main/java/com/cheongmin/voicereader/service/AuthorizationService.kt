@@ -6,17 +6,16 @@ import io.reactivex.Observer
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AuthorizationService {
     @GET("token")
     fun fetchAccessToken(
-    ) : Single<AccessToken>
+            @Header("Authorization")
+            idToken: String
+    ): Single<AccessToken>
 
     @POST("token")
     fun refreshAccessToken(
-    ) : Single<AccessToken>
+    ): Single<AccessToken>
 }

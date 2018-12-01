@@ -1,8 +1,10 @@
 package com.cheongmin.voicereader.network
 
+import com.cheongmin.voicereader.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,18 +14,8 @@ object RetrofitManager {
     private var retrofit: Retrofit
 
     init {
-        //TODO: Unused Code
-        val client = OkHttpClient.Builder().apply {
-            addInterceptor { chain ->
-                val newRequest = chain.request().newBuilder().apply {
-                    addHeader("Authorization", "")
-                }.build()
-                chain.proceed(newRequest)
-            }
-        }.build()
-
         retrofit = Retrofit.Builder().apply {
-            client(client)
+            client(createOkHttpClient())
             baseUrl(API_HOST)
             addConverterFactory(GsonConverterFactory.create())
             addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -35,6 +27,17 @@ object RetrofitManager {
                 .addHeader("Authorization", token)
                 .build())
     }
+
+    private fun createOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        return OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+    }
+
 
     internal fun<T> create(service: Class<T>): T {
         return retrofit.create(service)
