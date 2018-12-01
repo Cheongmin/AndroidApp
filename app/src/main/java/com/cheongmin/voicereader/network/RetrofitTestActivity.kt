@@ -3,26 +3,23 @@ package com.cheongmin.voicereader.network
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.cheongmin.voicereader.model.User
 import com.cheongmin.voicereader.R
-import com.cheongmin.voicereader.model.Question
-import com.cheongmin.voicereader.model.QuestionRequest
-import com.cheongmin.voicereader.service.QuestionService
-import com.cheongmin.voicereader.service.UserService
+import com.cheongmin.voicereader.api.UserAPI
 import kotlinx.android.synthetic.main.activity_retrofit.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
 
 
 class RetrofitTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_retrofit)
+
+        btn_request.setOnClickListener {
+            UserAPI.fetchUser("5bf95d3cb53fe700018fd517", {
+                tv_response.text = it.toString()
+            },{
+                Log.d("retrofit", it.message)
+            })
+        }
     }
 }
 

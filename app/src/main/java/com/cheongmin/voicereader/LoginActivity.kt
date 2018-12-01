@@ -8,29 +8,11 @@ import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import android.R.attr.data
-import android.R.attr.id
 import android.app.Activity
 import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.GetTokenResult
-import com.google.android.gms.tasks.Task
-import android.support.annotation.NonNull
 import android.util.Log
-import com.cheongmin.voicereader.model.*
-import com.cheongmin.voicereader.network.RetrofitManager
-import com.cheongmin.voicereader.network.RetrofitTestActivity
-import com.cheongmin.voicereader.service.AuthorizationService
-import com.cheongmin.voicereader.service.QuestionService
-import com.cheongmin.voicereader.service.UserService
-import com.google.android.gms.tasks.OnCompleteListener
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
+import com.cheongmin.voicereader.api.AuthorizationAPI
+import com.cheongmin.voicereader.api.UserAPI
 
 class LoginActivity : AppCompatActivity() {
     private val providers = Arrays.asList(
@@ -89,52 +71,11 @@ class LoginActivity : AppCompatActivity() {
                                             }
                                         })*/
 
-                                val apiClient2 = RetrofitManager.createWithToken(AuthorizationService::class.java, idToken)
-                                apiClient2.fetchAccessToken()
-                                        .enqueue(object: Callback<AccessToken> {
-                                            override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
-                                                Log.d("fetchAccessToken", "call onResponse")
-                                                Log.d("fetchAccessToken", response.message())
-                                                if (response.isSuccessful) {
-                                                    val accessToken = response.body()
-                                                    UserInfo.access_token=accessToken!!.access_token
-                                                    UserInfo.login=true
-
-                                                    Log.d("fetchAccessToken", UserInfo.access_token)
-
-                                                    val file = File("/storage/emulated/0/DCIM/Camera/1.jpg")
-                                                    if(file.exists()) {
-                                                        val photo = MultipartBody.Part.createFormData("photo", file.getName(), RequestBody.create(MediaType.parse("image/*"), file))
-
-                                                        val apiClient = RetrofitManager.createWithBearerToken(UserService::class.java, UserInfo.access_token)
-                                                        apiClient.uploadUserPhoto("5bf95d3cb53fe700018fd517", photo)
-                                                                .enqueue(object : Callback<Void> {
-                                                                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                                                                        Log.d("Retrofit", "call onResponse")
-                                                                        Log.d("Retrofit", response.message())
-                                                                        Log.d("Retrofit", response.body().toString())
-                                                                    }
-
-                                                                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                                                                        Log.d("Retrofit", "call onFailure")
-                                                                        t.printStackTrace()
-                                                                    }
-                                                                })
-                                                    }
-                                                }
-                                            }
-
-                                            override fun onFailure(call: Call<AccessToken>, t: Throwable) {
-                                                Log.d("Retrofit", "call onFailure")
-                                                t.printStackTrace()
-                                            }
-                                        })
-
-
-                                //5bf95d3cb53fe700018fd517
-
-
-                                Log.i("gyuhwan", idToken)
+                                AuthorizationAPI.fetchAccessToken(idToken, {
+                                    Log.d("fetchAccessToken", it?.access_token)
+                                },{
+                                    Log.d("fetchAccessToken", "call onFailure")
+                                })
                             } else {
                                 // Handle error -> task.getException();
                             }
