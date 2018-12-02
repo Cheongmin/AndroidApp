@@ -1,11 +1,12 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.network
 
 import android.content.Context
 import android.preference.PreferenceManager
-import android.util.Log
+import com.cheongmin.voicereader.SingletonHolder
 import com.cheongmin.voicereader.api.AuthorizationAPI
 import com.cheongmin.voicereader.model.AccessToken
 import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -46,14 +47,14 @@ class TokenManager private constructor(context: Context) {
         return !getToken().isNullOrBlank()
     }
 
-    fun refreshToken(): Completable {
-        return Completable.create { emitter ->
+    fun refreshToken(): Single<String> {
+        return Single.create { emitter ->
             AuthorizationAPI.refreshAccessToken(getRefreshToken())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({
                         setToken(it)
-                        emitter.onComplete()
+                        emitter.onSuccess(it.token)
                     }, {
                         emitter.onError(it)
                     })

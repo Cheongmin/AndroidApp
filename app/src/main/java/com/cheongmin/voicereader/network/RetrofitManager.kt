@@ -1,13 +1,8 @@
 package com.cheongmin.voicereader.network
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

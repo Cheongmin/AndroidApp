@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.network.RetrofitManager
+import com.cheongmin.voicereader.network.TokenManager
 
 class SplashActivity : AppCompatActivity() {
 
@@ -12,7 +13,14 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        // init retrofit builder without token for request access token
         RetrofitManager.init()
+
+        // debug login
+        if (BuildConfig.DEBUG) {
+            showLoginActivity()
+            return
+        }
 
         val tokenManager = TokenManager.getInstance(applicationContext)
         if (tokenManager.hasRefreshToken()) {
@@ -22,6 +30,7 @@ class SplashActivity : AppCompatActivity() {
                 // Fetch new token by refresh token
                 tokenManager.refreshToken()
                         .subscribe ({
+                            RetrofitManager.initWithToken(it)
                             showMainActivity()
                         }, {
                             throw it
