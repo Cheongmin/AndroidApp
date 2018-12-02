@@ -28,6 +28,8 @@ import okhttp3.RequestBody
 import retrofit2.*
 import java.io.File
 import java.lang.Exception
+import com.cheongmin.voicereader.api.AuthorizationAPI
+import com.cheongmin.voicereader.api.UserAPI
 
 class LoginActivity : AppCompatActivity() {
     private val providers = Arrays.asList(
@@ -106,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.i("idToken", it.token)
+                    Log.i("idToken", it.toString())
                 }, {
                     throw it
                 })
