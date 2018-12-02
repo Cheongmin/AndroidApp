@@ -60,5 +60,5 @@ class TokenManager private constructor(context: Context) {
         }
     }
 
-    companion object : SingletonHolder<TokenManager, Context>(::TokenManager)
+    companion object: SingletonHolder<TokenManager, Context>(::TokenManager)
 }
