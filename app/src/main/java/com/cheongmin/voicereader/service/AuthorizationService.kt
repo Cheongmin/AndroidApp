@@ -17,5 +17,7 @@ interface AuthorizationService {
 
     @POST("token")
     fun refreshAccessToken(
+            @Header("Authorization")
+            refreshToken: String
     ): Single<AccessToken>
 }

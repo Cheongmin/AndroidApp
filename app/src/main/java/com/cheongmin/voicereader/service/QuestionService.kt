@@ -4,6 +4,7 @@ import com.cheongmin.voicereader.model.Answer
 import com.cheongmin.voicereader.model.AnswerRequest
 import com.cheongmin.voicereader.model.Question
 import com.cheongmin.voicereader.model.QuestionRequest
+import io.reactivex.Completable
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -29,7 +30,7 @@ interface QuestionService {
     ) : Single<List<Question>>
 
     @GET("questions/{question_id}")
-    fun fetchQuestionsById(
+    fun fetchQuestionById(
             @Path("question_id")
             question_id: String
     ) : Single<Question>
@@ -38,7 +39,7 @@ interface QuestionService {
     fun removeQuestion(
             @Path("question_id")
             question_id: String
-    ) : Single<Void>
+    ) : Completable
 
     @POST("/questions/{question_id}/answers")
     fun newAnswer(

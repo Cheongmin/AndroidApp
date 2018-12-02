@@ -70,31 +70,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUserProfile(): Single<Photo> {
-        val apiClient = RetrofitManager.createWithBearerToken(UserService::class.java, UserInfo.access_token)
-
-        val file = File("/sdcard/DCIM/Camera/IMG_20181127_163346.jpg")
-        val photo = MultipartBody.Part.createFormData("photo", file.name, RequestBody.create(MediaType.parse("image/*"), file))
-
-        Log.i("updateUserProfile", "call")
-
-        return apiClient.uploadUserPhoto("5bf95d3cb53fe700018fd517", photo)
-    }
-
-    private fun getAccessToken(idToken: String) : Single<AccessToken> {
-        return Single.create { emitter ->
-            val apiClient = RetrofitManager.create(AuthorizationService::class.java)
-            apiClient.fetchAccessToken(idToken)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe ({
-                        emitter.onSuccess(it)
-                    }, {
-                        emitter.onError(it)
-                    })
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -104,7 +79,6 @@ class LoginActivity : AppCompatActivity() {
 
         RxFirebaseAuth.getCurrentUser(FirebaseAuth.getInstance())
                 .flatMapSingle { user -> RxFirebaseUser.getIdToken(user, true) }
-                .flatMap { idToken -> getAccessToken(idToken) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

@@ -22,7 +22,7 @@ interface UserService {
             userid: String,
             @Body
             body: UserRequest
-    ) : Completable
+    ) : Single<User>
 
     @Multipart
     @POST("users/{userid}")

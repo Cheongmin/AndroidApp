@@ -5,129 +5,126 @@ import com.cheongmin.voicereader.model.AnswerRequest
 import com.cheongmin.voicereader.model.Question
 import com.cheongmin.voicereader.network.RetrofitManager
 import com.cheongmin.voicereader.service.QuestionService
+import com.cheongmin.voicereader.service.UserService
+import io.reactivex.Completable
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 object QuestionAPI {
-    fun newQuestion(accessToken: String?, sound: MultipartBody.Part, json: MultipartBody.Part, onSuccess: (response: Question?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.newQuestion(sound, json)
-                .enqueue(object : Callback<Question> {
-                    override fun onResponse(call: Call<Question>, response: Response<Question>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Question>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun newQuestion(sound: MultipartBody.Part, json: MultipartBody.Part): Single<Question> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .newQuestion(sound, json)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun fetchQuestions(accessToken: String?, offset: Int, size: Int, onSuccess: (response: List<Question>?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.fetchQuestions(offset, size)
-                .enqueue(object : Callback<List<Question>> {
-                    override fun onResponse(call: Call<List<Question>>, response: Response<List<Question>>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<List<Question>>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun fetchQuestions(offset: Int, size: Int) : Single<List<Question>> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .fetchQuestions(offset, size)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun fetchQuestionsById(accessToken: String?, question_id: String, onSuccess: (response: Question?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.fetchQuestionsById(question_id)
-                .enqueue(object : Callback<Question> {
-                    override fun onResponse(call: Call<Question>, response: Response<Question>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Question>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun fetchQuestionById(questionId: String): Single<Question> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .fetchQuestionById(questionId)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun removeQuestion(accessToken: String?, question_id: String, onSuccess: (response: Void?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.removeQuestion(question_id)
-                .enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun removeQuestion(questionId: String): Completable {
+        return Completable.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .removeQuestion(questionId)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onComplete()
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun newAnswer(accessToken: String?, question_id: String, body: AnswerRequest, onSuccess: (response: Answer?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.newAnswer(question_id, body)
-                .enqueue(object : Callback<Answer> {
-                    override fun onResponse(call: Call<Answer>, response: Response<Answer>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Answer>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun newAnswer(questionId: String, body: AnswerRequest): Single<Answer> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .newAnswer(questionId, body)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun fetchAnswersByQuestionId(accessToken: String?, question_id: String, onSuccess: (response: List<Answer>?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.fetchAnswersByQuestionId(question_id)
-                .enqueue(object : Callback<List<Answer>> {
-                    override fun onResponse(call: Call<List<Answer>>, response: Response<List<Answer>>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<List<Answer>>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun fetchAnswersByQuestionId(questionId: String): Single<List<Answer>> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .fetchAnswersByQuestionId(questionId)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun fetchAnswerById(accessToken: String?, question_id: String, answer_id: String, onSuccess: (response: Answer?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.fetchAnswerById(question_id, answer_id)
-                .enqueue(object : Callback<Answer> {
-                    override fun onResponse(call: Call<Answer>, response: Response<Answer>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Answer>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun fetchAnswerById(questionId: String, answerId: String): Single<Answer> {
+        return Single.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .fetchAnswerById(questionId, answerId)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onSuccess(it)
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 
-    fun removeAnswer(accessToken: String?, question_id: String, answer_id: String, onSuccess: (response: Void?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
-        val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.removeAnswer(question_id, answer_id)
-                .enqueue(object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        if (response.isSuccessful) {
-                            onSuccess.invoke(response.body())
-                        }
-                    }
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        onFailure.invoke(t)
-                    }
-                })
+    fun removeAnswer(questionId: String, answerId: String): Completable {
+        return Completable.create { emitter ->
+            RetrofitManager.create(QuestionService::class.java)
+                    .removeAnswer(questionId, answerId)
+                    .observeOn(Schedulers.io())
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        emitter.onComplete()
+                    }, {
+                        emitter.onError(it)
+                    })
+        }
     }
 }

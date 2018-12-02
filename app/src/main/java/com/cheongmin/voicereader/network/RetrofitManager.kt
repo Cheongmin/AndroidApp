@@ -1,5 +1,9 @@
 package com.cheongmin.voicereader.network
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -11,58 +15,53 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
     private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com/api/v1/"
-    private var retrofit: Retrofit
+    private lateinit var retrofit: Retrofit
 
-    init {
+    fun init() {
         retrofit = Retrofit.Builder().apply {
-            client(createOkHttpClient())
             baseUrl(API_HOST)
+            client(setupOkHttpClient())
             addConverterFactory(GsonConverterFactory.create())
             addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         }.build()
     }
 
-    private fun accessTokenProvidingInterceptor(token: String?) = Interceptor { chain ->
+    fun initWithToken(token: String) {
+        retrofit = Retrofit.Builder().apply {
+            baseUrl(API_HOST)
+            client(setupOkHttpClientWithToken(token))
+            addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        }.build()
+    }
+
+    private fun setupOkHttpClient() : OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG)
+                addInterceptor(createHttpLoggingInterceptor())
+        }.build()
+    }
+
+    private fun setupOkHttpClientWithToken(token: String): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            addInterceptor(createTokenProvidingInterceptor(token))
+            if (BuildConfig.DEBUG)
+                addInterceptor(createHttpLoggingInterceptor())
+        }.build()
+    }
+
+    private fun createTokenProvidingInterceptor(token: String) = Interceptor { chain ->
         chain.proceed(chain.request().newBuilder()
                 .addHeader("Authorization", token)
                 .build())
     }
 
-    private fun createOkHttpClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-
-        return OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .build()
+    private fun createHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
     }
-
 
     internal fun<T> create(service: Class<T>): T {
         return retrofit.create(service)
-    }
-
-    internal fun<T> createWithToken(service: Class<T>, token: String?): T {
-        return Retrofit.Builder().apply {
-            client(OkHttpClient.Builder().apply {
-                addInterceptor(accessTokenProvidingInterceptor(token))
-            }.build())
-            baseUrl(API_HOST)
-            addConverterFactory(GsonConverterFactory.create())
-            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        }.build().create(service)
-    }
-
-    internal fun<T> createWithBearerToken(service: Class<T>, token: String?): T {
-        return Retrofit.Builder().apply {
-            client(OkHttpClient.Builder().apply {
-                addInterceptor(accessTokenProvidingInterceptor("Bearer " + token))
-            }.build())
-            baseUrl(API_HOST)
-            addConverterFactory(GsonConverterFactory.create())
-            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        }.build().create(service)
     }
 
 }
