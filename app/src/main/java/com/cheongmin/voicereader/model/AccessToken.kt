@@ -4,5 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class AccessToken(
         @SerializedName("access_token")
-        var access_token: String
+        var token: String,
+
+        @SerializedName("refresh_token")
+        var refreshToken: String
 )

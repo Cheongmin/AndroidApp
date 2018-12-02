@@ -1,66 +1,67 @@
 package com.cheongmin.voicereader.network
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import com.auth0.android.jwt.JWT
+import com.cheongmin.voicereader.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
     private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com/api/v1/"
-    private const val ID_TOKEN = ""
-    private const val ACCESS_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMTc3OWU1MS1lMGRmLTQyMzgtOTMxMi0yOWNmN2JiMWY2NzciLCJleHAiOjE1NDI4OTM5MzYsImZyZXNoIjpmYWxzZSwiaWF0IjoxNTQyODA3NTM2LCJ0eXBlIjoiYWNjZXNzIiwibmJmIjoxNTQyODA3NTM2LCJpZGVudGl0eSI6IjViZjU1YjI4OGMxNzJlMDAwMWZhNDViMiJ9.s4wN48et5bJGRgoYLGH_g7CVtTHYlpoJ2HGQzXO1Bi4"
+    private lateinit var retrofit: Retrofit
 
-    private var client: OkHttpClient
-    private var retrofit: Retrofit
-
-    init {
-        client = OkHttpClient.Builder().apply {
-            addInterceptor(object : Interceptor {
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    val newRequest = chain.request().newBuilder().apply {
-                        addHeader("Authorization", ACCESS_TOKEN)
-                    }.build()
-                    return chain.proceed(newRequest)
-                }
-            })
-        }.build()
-
+    fun init() {
         retrofit = Retrofit.Builder().apply {
-            client(client)
             baseUrl(API_HOST)
+            client(setupOkHttpClient())
             addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         }.build()
     }
 
-    fun accessTokenProvidingInterceptor(token: String?) = Interceptor { chain ->
+    fun initWithToken(token: String) {
+        retrofit = Retrofit.Builder().apply {
+            baseUrl(API_HOST)
+            client(setupOkHttpClientWithToken(token))
+            addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        }.build()
+    }
+
+    private fun setupOkHttpClient() : OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            if (BuildConfig.DEBUG)
+                addInterceptor(createHttpLoggingInterceptor())
+        }.build()
+    }
+
+    private fun setupOkHttpClientWithToken(token: String): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            addInterceptor(createTokenProvidingInterceptor(token))
+            if (BuildConfig.DEBUG)
+                addInterceptor(createHttpLoggingInterceptor())
+        }.build()
+    }
+
+    private fun createTokenProvidingInterceptor(token: String) = Interceptor { chain ->
         chain.proceed(chain.request().newBuilder()
                 .addHeader("Authorization", token)
                 .build())
     }
 
+    private fun createHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
     internal fun<T> create(service: Class<T>): T {
         return retrofit.create(service)
-    }
-
-    internal fun<T> createWithToken(service: Class<T>, token: String?): T {
-        return Retrofit.Builder().apply {
-            client(OkHttpClient.Builder().apply {
-                addInterceptor(accessTokenProvidingInterceptor(token))
-            }.build())
-            baseUrl(API_HOST)
-            addConverterFactory(GsonConverterFactory.create())
-        }.build().create(service)
-    }
-
-    internal fun<T> createWithBearerToken(service: Class<T>, token: String?): T {
-        return Retrofit.Builder().apply {
-            client(OkHttpClient.Builder().apply {
-                addInterceptor(accessTokenProvidingInterceptor("Bearer " + token))
-            }.build())
-            baseUrl(API_HOST)
-            addConverterFactory(GsonConverterFactory.create())
-        }.build().create(service)
     }
 
 }

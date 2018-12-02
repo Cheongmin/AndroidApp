@@ -4,6 +4,8 @@ import com.cheongmin.voicereader.model.Answer
 import com.cheongmin.voicereader.model.AnswerRequest
 import com.cheongmin.voicereader.model.Question
 import com.cheongmin.voicereader.model.QuestionRequest
+import io.reactivex.Completable
+import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -17,7 +19,7 @@ interface QuestionService {
             sound: MultipartBody.Part,
             @Part
             json: MultipartBody.Part
-    ) : Call<Question>
+    ) : Single<Question>
 
     @GET("questions")
     fun fetchQuestions(
@@ -25,19 +27,19 @@ interface QuestionService {
             offset: Int,
             @Query("size")
             size: Int
-    ) : Call<List<Question>>
+    ) : Single<List<Question>>
 
     @GET("questions/{question_id}")
-    fun fetchQuestionsById(
+    fun fetchQuestionById(
             @Path("question_id")
             question_id: String
-    ) : Call<Question>
+    ) : Single<Question>
 
     @DELETE("questions/{question_id}")
     fun removeQuestion(
             @Path("question_id")
             question_id: String
-    ) : Call<Void>
+    ) : Completable
 
     @POST("/questions/{question_id}/answers")
     fun newAnswer(
@@ -45,13 +47,13 @@ interface QuestionService {
             question_id: String,
             @Body
             body: AnswerRequest
-    ) : Call<Answer>
+    ) : Single<Answer>
 
     @GET("/questions/{question_id}/answers")
     fun fetchAnswersByQuestionId(
             @Path("question_id")
             question_id: String
-    ) : Call<List<Answer>>
+    ) : Single<List<Answer>>
 
     @GET("/questions/{question_id}/answers/{answer_id}")
     fun fetchAnswerById(
@@ -59,7 +61,7 @@ interface QuestionService {
             question_id: String,
             @Path("answer_id")
             answer_id: String
-    ) : Call<Answer>
+    ) : Single<Answer>
 
     @DELETE("/questions/{question_id}/answers/{answer_id}")
     fun removeAnswer(
@@ -67,5 +69,5 @@ interface QuestionService {
             question_id: String,
             @Path("answer_id")
             answer_id: String
-    ) : Call<Void>
+    ) : Single<Void>
 }
