@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.cheongmin.voicereader.model.Article
 import com.cheongmin.voicereader.model.Comment
 import com.cheongmin.voicereader.model.User
+import com.cheongmin.voicereader.utils.DateUtils
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_show_post_answer.setOnClickListener {
-            val intent = Intent(this, PostAnswerActivity::class.java)
+            val intent = Intent(this, QuestionListActivity::class.java)
             startActivity(intent)
         }
 
@@ -43,13 +44,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PostQuestionActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun getDate(year: Int, month: Int, date: Int, hourOfDay: Int, minute: Int): Date {
-        var calendar = Calendar.getInstance()
-        calendar.set(year, month, date, hourOfDay, minute)
-
-        return calendar.time
     }
 
     private fun setupData() {
@@ -73,17 +67,30 @@ class MainActivity : AppCompatActivity() {
         var article1 = Article(user1)
         article1.title = "발음 교정 관련 질문입니다"
         article1.content = "얼마 후 면접이 있는데, 자기소개를 준비하고 있습니다. \n 내용이 잘 들리는지, 잘못 발음하는 부분이 없는지 확인 부탁드려요."
-        article1.date = getDate(2018, 12, 1, 12, 30).time
+        article1.date = DateUtils.toLong(2018, 12, 1, 12, 30)
 
-        var comment1 = Comment(user2)
-        comment1.content = "발음보다도 전체적인 내용이 정리되지 않은 것 같아요."
-        comment1.date = getDate(2018, 12, 1, 16, 0).time
+        var comment1_1 = Comment(user2)
+        comment1_1.content = "발음보다도 전체적인 내용이 정리되지 않은 것 같아요."
+        comment1_1.date = DateUtils.toLong(2018, 12, 1, 16, 0)
 
-        var comment2 = Comment(user3)
-        comment2.content = "중간 중간 비음이 너무 심해 발음이 명확하지 않게 들릴 수 있습니다.\n병원에 내원하셔서 간단한 검사를 받아보시는 걸 추천드립니다."
-        comment2.date = getDate(2018, 12, 1, 18, 30).time
+        var comment1_2 = Comment(user3)
+        comment1_2.content = "중간 중간 비음이 너무 심해 발음이 명확하지 않게 들릴 수 있습니다.\n병원에 내원하셔서 간단한 검사를 받아보시는 걸 추천드립니다."
+        comment1_2.date = DateUtils.toLong(2018, 12, 1, 18, 30)
 
-        article1.comments.addAll(listOf(comment1, comment2))
+        article1.comments.addAll(listOf(comment1_1, comment1_2))
+
+        var article2 = Article(user1)
+        article2.title = "언어 치료 질문이 있습니다"
+        article2.content = "주변에서 계속 발음에 대해 지적해줘서, 언어 치료를 받아볼려고 하는데\n치료 효과가 어느정도인지 궁금합니다."
+        article2.date = DateUtils.toLong(2018, 12, 2, 13, 20)
+
+        var comment2_1 = Comment(user3)
+        comment2_1.content = "현재 음성으로는 발음 방법부터 하나씩 짚어야할 것 같습니다.\n병원에 내원하여 더 자세한 상담해보시길 바랍니다."
+        comment2_1.date = DateUtils.toLong(2018, 12, 2, 15, 30)
+
+        article2.comments.addAll(listOf(comment2_1))
+
+        db.articles.addAll(arrayOf(article1, article2))
     }
 
     private fun setupProfile(uri: String) {

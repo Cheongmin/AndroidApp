@@ -6,8 +6,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.cheongmin.voicereader.dialog.RecordDialog
 import com.cheongmin.voicereader.dialog.RecordDialogListener
+import com.cheongmin.voicereader.model.Article
 import kotlinx.android.synthetic.main.activity_post_question.*
 import kotlinx.android.synthetic.main.include_toolbar.*
+import java.util.*
 
 class PostQuestionActivity : AppCompatActivity() {
 
@@ -42,6 +44,14 @@ class PostQuestionActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_item_post_question_post -> {
+                val article = Article(db.users[0])
+                article.title = edit_title.text.toString()
+                article.content = edit_content.text.toString()
+                article.date = Date().time
+
+                db.articles.add(article)
+                finish()
+
                 return true
             }
         }

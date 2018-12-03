@@ -7,8 +7,11 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_post_answer.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import com.cheongmin.voicereader.R.id.scroll
-
-
+import com.cheongmin.voicereader.adapter.CommentAdapter
+import com.cheongmin.voicereader.model.Comment
+import com.cheongmin.voicereader.utils.DateUtils
+import kotlinx.android.synthetic.main.layout_question.*
+import java.util.*
 
 class PostAnswerActivity : AppCompatActivity() {
 
@@ -16,15 +19,43 @@ class PostAnswerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_answer)
 
+        val index = intent.getIntExtra("index", 0)
+        val article = db.articles[index]
+
         setupActionBar()
         setupProfile()
 
-        setupAnswerList()
-    }
+        tv_question_title.text = article.title
+        tv_question_content.text = article.content
+        tv_question_date.text = DateUtils.toDayText(article.date)
 
-    private fun setupAnswerList() {
+        tv_question_user_name.text = article.author.name
+        tv_question_user_location.text = article.author.location
+        Picasso.get()
+                .load(article.author.profileUri)
+                .placeholder(R.drawable.ic_profile_placeholder)
+                .into(iv_question_user_profile)
+
+        val adapter = CommentAdapter()
+        adapter.addItems(article.comments)
+        adapter.notifyDataSetChanged()
+
+        rv_answers.adapter = adapter
+
         sv_content.post {
             sv_content.fullScroll(View.FOCUS_UP)
+        }
+
+        btn_submit.setOnClickListener {
+            val comment = Comment(db.users[0])
+            comment.content = edit_answer.text.toString()
+            comment.date = Date().time
+
+            article.comments.add(comment)
+            adapter.addItem(comment)
+            adapter.notifyDataSetChanged()
+
+            edit_answer.text.clear()
         }
     }
 
