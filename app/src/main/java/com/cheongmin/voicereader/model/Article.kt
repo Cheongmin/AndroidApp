@@ -5,5 +5,5 @@ data class Article(
         var title: String = "",
         var content: String = "",
         var date: Long = 0,
-        var comments: List<Comment>
+        var comments: MutableList<Comment> = mutableListOf()
 )
