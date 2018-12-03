@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.cheongmin.voicereader.dialog.RecordDialog
 import com.cheongmin.voicereader.dialog.RecordDialogListener
 import kotlinx.android.synthetic.main.activity_post_question.*
@@ -43,7 +42,6 @@ class PostQuestionActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menu_item_post_question_post -> {
-                Toast.makeText(applicationContext, "Call Upload", Toast.LENGTH_SHORT).show()
                 return true
             }
         }

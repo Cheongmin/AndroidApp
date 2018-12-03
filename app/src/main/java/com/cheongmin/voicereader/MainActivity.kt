@@ -1,13 +1,9 @@
 package com.cheongmin.voicereader
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.cheongmin.voicereader.api.UserAPI
-import com.cheongmin.voicereader.user.UserManager
+import android.support.v7.app.AppCompatActivity
 import com.squareup.picasso.Picasso
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -18,11 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupActionBar()
-
-        val userManager = UserManager.getInstance(applicationContext)
-        setupWelcomeMessage(userManager?.user?.displayName!!)
-        setupProfile(userManager?.user?.pictureUri!!)
-        setupInformation()
 
         btn_show_post_answer.setOnClickListener {
             val intent = Intent(this, PostAnswerActivity::class.java)

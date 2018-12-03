@@ -2,7 +2,6 @@ package com.cheongmin.voicereader.user
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.cheongmin.voicereader.SingletonHolder
 import com.cheongmin.voicereader.model.User
 
 const val USER_ID = "user.id"
