@@ -11,12 +11,12 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 
 object UserAPI {
-    fun newUsers(body: UserRequest): Single<User> {
+    fun newUser(body: UserRequest): Single<User> {
         return Single.create { emitter ->
             RetrofitManager.create(UserService::class.java)
                     .newUsers(body)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {
@@ -29,8 +29,8 @@ object UserAPI {
         return Single.create { emitter ->
             RetrofitManager.create(UserService::class.java)
                     .updateUser(userId, body)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {
@@ -43,8 +43,8 @@ object UserAPI {
         return Single.create { emitter ->
             RetrofitManager.create(UserService::class.java)
                     .uploadUserPhoto(userId, photo)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {
@@ -57,8 +57,8 @@ object UserAPI {
         return Single.create { emitter ->
             RetrofitManager.create(UserService::class.java)
                     .fetchUser(userId)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {

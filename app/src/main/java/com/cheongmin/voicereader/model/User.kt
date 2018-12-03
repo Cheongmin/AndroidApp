@@ -12,6 +12,9 @@ data class User(
         @SerializedName("display_name")
         var displayName: String,
 
+        @SerializedName("picture")
+        var pictureUri: String,
+
         @SerializedName("email")
         var email: String,
 

@@ -90,8 +90,8 @@ object QuestionAPI {
         return Single.create { emitter ->
             RetrofitManager.create(QuestionService::class.java)
                     .fetchAnswersByQuestionId(questionId)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {
@@ -104,8 +104,8 @@ object QuestionAPI {
         return Single.create { emitter ->
             RetrofitManager.create(QuestionService::class.java)
                     .fetchAnswerById(questionId, answerId)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onSuccess(it)
                     }, {
@@ -118,8 +118,8 @@ object QuestionAPI {
         return Completable.create { emitter ->
             RetrofitManager.create(QuestionService::class.java)
                     .removeAnswer(questionId, answerId)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         emitter.onComplete()
                     }, {

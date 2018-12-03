@@ -24,7 +24,7 @@ object RetrofitManager {
     fun initWithToken(token: String) {
         retrofit = Retrofit.Builder().apply {
             baseUrl(API_HOST)
-            client(setupOkHttpClientWithToken(token))
+            client(setupOkHttpClientWithToken("Bearer $token"))
             addConverterFactory(GsonConverterFactory.create())
             addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         }.build()
