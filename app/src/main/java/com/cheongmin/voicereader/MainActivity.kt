@@ -3,17 +3,28 @@ package com.cheongmin.voicereader
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.cheongmin.voicereader.model.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupActionBar()
+        setupUI()
+        setupData()
+    }
+
+    private fun setupUI() {
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.run {
+            title="홈"
+            setDisplayShowTitleEnabled(true)
+            setDisplayHomeAsUpEnabled(false)
+        }
 
         btn_show_post_answer.setOnClickListener {
             val intent = Intent(this, PostAnswerActivity::class.java)
@@ -26,14 +37,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupActionBar() {
-        setSupportActionBar(toolbar)
+    private fun setupData() {
+        var user1 = User()
+        user1.name = "김질문"
+        user1.location = "경기도 의정부시"
+        user1.profileUri = "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?h=350&auto=compress&cs=tinysrgb"
 
-        supportActionBar?.run {
-            title="홈"
-            setDisplayShowTitleEnabled(true)
-            setDisplayHomeAsUpEnabled(false)
-        }
+        var user2 = User()
+        user2.name = "박답변"
+        user2.location = "서울특별시 강남구"
+        user2.profileUri = "https://pbs.twimg.com/profile_images/1006266234181210117/oedmUmVc.jpg"
+
+        var user3 = User()
+        user3.name = "전의사"
+        user3.location = "@의정부언어치료센터"
+        user3.profileUri = "https://pbs.twimg.com/profile_images/982738694116438017/-mLhSdy7.jpg"
     }
 
     private fun setupProfile(uri: String) {
