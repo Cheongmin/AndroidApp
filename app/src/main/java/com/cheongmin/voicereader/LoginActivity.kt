@@ -17,46 +17,46 @@ import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
-    private val providers = Arrays.asList(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build())
+  private val providers = Arrays.asList(
+    AuthUI.IdpConfig.EmailBuilder().build(),
+    AuthUI.IdpConfig.GoogleBuilder().build())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_login)
 
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .setIsSmartLockEnabled(false)
-                        .build(), RC_SIGN_IN)
-    }
+    startActivityForResult(
+      AuthUI.getInstance()
+        .createSignInIntentBuilder()
+        .setAvailableProviders(providers)
+        .setIsSmartLockEnabled(false)
+        .build(), RC_SIGN_IN)
+  }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode != RC_SIGN_IN)
-            return
+    if (requestCode != RC_SIGN_IN)
+      return
 
-        val response: IdpResponse = IdpResponse.fromResultIntent(data)!!
+    val response: IdpResponse = IdpResponse.fromResultIntent(data)!!
 
-        if (resultCode != Activity.RESULT_OK)
-            return
+    if (resultCode != Activity.RESULT_OK)
+      return
 
-        RxFirebaseAuth.getCurrentUser(FirebaseAuth.getInstance())
-                .flatMapSingle { user -> RxFirebaseUser.getIdToken(user, true) }
-                .flatMap { idToken -> AuthorizationAPI.fetchAccessToken(idToken) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    TokenManager.getInstance(applicationContext).setToken(it)
-                }, {
-                    throw it
-                })
-    }
+    RxFirebaseAuth.getCurrentUser(FirebaseAuth.getInstance())
+      .flatMapSingle { user -> RxFirebaseUser.getIdToken(user, true) }
+      .flatMap { idToken -> AuthorizationAPI.fetchAccessToken(idToken) }
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe({
+        TokenManager.getInstance(applicationContext).setToken(it)
+      }, {
+        throw it
+      })
+  }
 
-    companion object {
-        const val RC_SIGN_IN = 100
-    }
+  companion object {
+    const val RC_SIGN_IN = 100
+  }
 }

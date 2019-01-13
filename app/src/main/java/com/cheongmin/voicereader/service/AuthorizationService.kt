@@ -9,15 +9,15 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface AuthorizationService {
-    @GET("token")
-    fun fetchAccessToken(
-            @Header("Authorization")
-            idToken: String
-    ): Single<AccessToken>
+  @GET("token")
+  fun fetchAccessToken(
+    @Header("Authorization")
+    idToken: String
+  ): Single<AccessToken>
 
-    @POST("token")
-    fun refreshAccessToken(
-            @Header("Authorization")
-            refreshToken: String
-    ): Single<AccessToken>
+  @POST("token")
+  fun refreshAccessToken(
+    @Header("Authorization")
+    refreshToken: String
+  ): Single<AccessToken>
 }

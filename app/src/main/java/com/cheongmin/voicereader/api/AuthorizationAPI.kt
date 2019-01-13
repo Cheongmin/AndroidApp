@@ -12,31 +12,31 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object AuthorizationAPI {
-    fun fetchAccessToken(idToken: String): Single<AccessToken> {
-        return Single.create { emitter ->
-            val apiClient = RetrofitManager.create(AuthorizationService::class.java)
-            apiClient.fetchAccessToken(idToken)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        emitter.onSuccess(it)
-                    }, {
-                        emitter.onError(it)
-                    })
-        }
+  fun fetchAccessToken(idToken: String): Single<AccessToken> {
+    return Single.create { emitter ->
+      val apiClient = RetrofitManager.create(AuthorizationService::class.java)
+      apiClient.fetchAccessToken(idToken)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+          emitter.onSuccess(it)
+        }, {
+          emitter.onError(it)
+        })
     }
+  }
 
-    fun refreshAccessToken(refreshToken: String) : Single<AccessToken> {
-        return Single.create { emitter ->
-            val apiClient = RetrofitManager.create(AuthorizationService::class.java)
-            apiClient.refreshAccessToken("Bearer $refreshToken")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        emitter.onSuccess(it)
-                    }, {
-                        emitter.onError(it)
-                    })
-        }
+  fun refreshAccessToken(refreshToken: String): Single<AccessToken> {
+    return Single.create { emitter ->
+      val apiClient = RetrofitManager.create(AuthorizationService::class.java)
+      apiClient.refreshAccessToken("Bearer $refreshToken")
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe({
+          emitter.onSuccess(it)
+        }, {
+          emitter.onError(it)
+        })
     }
+  }
 }

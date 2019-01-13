@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -75,7 +74,7 @@
             android:layout_marginRight="8dp"
             android:text="0점"
             android:textSize="18sp"
-            android:textColor="@color/colorGray9"/>
+            android:textColor="@color/colorGray9" />
 
     </LinearLayout>
 
@@ -97,7 +96,7 @@
             android:text="@string/post_question"
             android:textSize="18sp"
             android:textStyle="bold"
-            style="?android:attr/borderlessButtonStyle"/>
+            style="?android:attr/borderlessButtonStyle" />
 
         <Button
             android:id="@+id/btn_show_post_answer"
@@ -110,7 +109,7 @@
             android:text="@string/post_answer"
             android:textSize="18sp"
             android:textStyle="bold"
-            style="?android:attr/borderlessButtonStyle"/>
+            style="?android:attr/borderlessButtonStyle" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
