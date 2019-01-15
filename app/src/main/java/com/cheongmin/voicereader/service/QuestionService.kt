@@ -16,7 +16,9 @@ interface QuestionService {
             @Part
             sound: MultipartBody.Part,
             @Part
-            json: MultipartBody.Part
+            subtitles: MultipartBody.Part,
+            @Part
+            contents: MultipartBody.Part
     ) : Call<Question>
 
     @GET("questions")

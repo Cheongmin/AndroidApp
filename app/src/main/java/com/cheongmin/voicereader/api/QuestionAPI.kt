@@ -11,9 +11,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 object QuestionAPI {
-    fun newQuestion(accessToken: String?, sound: MultipartBody.Part, json: MultipartBody.Part, onSuccess: (response: Question?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
+    fun newQuestion(accessToken: String?, sound: MultipartBody.Part, subtitles: MultipartBody.Part, contents: MultipartBody.Part, onSuccess: (response: Question?) -> Unit, onFailure: (throwable: Throwable) -> Unit){
         val apiClient = RetrofitManager.createWithBearerToken(QuestionService::class.java, accessToken)
-        apiClient.newQuestion(sound, json)
+        apiClient.newQuestion(sound, subtitles, contents)
                 .enqueue(object : Callback<Question> {
                     override fun onResponse(call: Call<Question>, response: Response<Question>) {
                         if (response.isSuccessful) {
