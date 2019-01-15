@@ -9,11 +9,11 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface AuthorizationService {
-    @GET("token")
+    @GET("oauth2/token")
     fun fetchAccessToken(
     ) : Call<AccessToken>
 
-    @POST("token")
+    @POST("oauth2/token")
     fun refreshAccessToken(
     ) : Call<AccessToken>
 }
