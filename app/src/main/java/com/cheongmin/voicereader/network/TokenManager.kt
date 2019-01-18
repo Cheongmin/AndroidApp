@@ -4,7 +4,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import com.cheongmin.voicereader.SingletonHolder
 import com.cheongmin.voicereader.api.AuthorizationAPI
-import com.cheongmin.voicereader.model.AccessToken
+import com.cheongmin.voicereader.model.response.AccessToken
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

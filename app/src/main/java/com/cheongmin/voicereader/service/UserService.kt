@@ -1,12 +1,10 @@
 package com.cheongmin.voicereader.service
 
-import com.cheongmin.voicereader.model.Photo
-import com.cheongmin.voicereader.model.UserRequest
-import com.cheongmin.voicereader.model.User
-import io.reactivex.Completable
+import com.cheongmin.voicereader.model.response.Photo
+import com.cheongmin.voicereader.model.request.UserRequest
+import com.cheongmin.voicereader.model.response.User
 import io.reactivex.Single
 import okhttp3.MultipartBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface UserService {

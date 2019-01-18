@@ -1,15 +1,11 @@
 package com.cheongmin.voicereader.api
 
-import android.util.Log
-import com.cheongmin.voicereader.model.AccessToken
+import com.cheongmin.voicereader.model.response.AccessToken
 import com.cheongmin.voicereader.network.RetrofitManager
 import com.cheongmin.voicereader.service.AuthorizationService
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 object AuthorizationAPI {
   fun fetchAccessToken(idToken: String): Single<AccessToken> {

@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cheongmin.voicereader.R
-import com.cheongmin.voicereader.model.Answer
-import com.squareup.picasso.Picasso
+import com.cheongmin.voicereader.model.response.Answer
 import kotlinx.android.synthetic.main.layout_answer.view.*
 
 class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {

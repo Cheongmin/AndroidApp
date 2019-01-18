@@ -1,8 +1,8 @@
 package com.cheongmin.voicereader.api
 
-import com.cheongmin.voicereader.model.Photo
-import com.cheongmin.voicereader.model.User
-import com.cheongmin.voicereader.model.UserRequest
+import com.cheongmin.voicereader.model.response.Photo
+import com.cheongmin.voicereader.model.response.User
+import com.cheongmin.voicereader.model.request.UserRequest
 import com.cheongmin.voicereader.network.RetrofitManager
 import com.cheongmin.voicereader.service.UserService
 import io.reactivex.Single

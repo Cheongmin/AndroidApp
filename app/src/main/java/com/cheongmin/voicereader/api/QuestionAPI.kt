@@ -1,19 +1,15 @@
 package com.cheongmin.voicereader.api
 
-import com.cheongmin.voicereader.model.Answer
-import com.cheongmin.voicereader.model.AnswerRequest
-import com.cheongmin.voicereader.model.Question
+import com.cheongmin.voicereader.model.response.Answer
+import com.cheongmin.voicereader.model.request.AnswerRequest
+import com.cheongmin.voicereader.model.response.Question
 import com.cheongmin.voicereader.network.RetrofitManager
 import com.cheongmin.voicereader.service.QuestionService
-import com.cheongmin.voicereader.service.UserService
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 object QuestionAPI {
   fun newQuestion(sound: MultipartBody.Part, json: MultipartBody.Part): Single<Question> {
