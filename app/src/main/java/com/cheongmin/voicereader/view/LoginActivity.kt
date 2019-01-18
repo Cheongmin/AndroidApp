@@ -1,23 +1,19 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.view
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.androidhuman.rxfirebase2.auth.RxFirebaseAuth
-import com.androidhuman.rxfirebase2.auth.RxFirebaseUser
-import com.androidhuman.rxfirebase2.auth.rxGetIdToken
-import com.androidhuman.rxfirebase2.auth.rxSignInAnonymously
+import com.androidhuman.rxfirebase2.auth.*
+import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.api.AuthorizationAPI
 import com.cheongmin.voicereader.network.TokenManager
-import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -26,7 +22,9 @@ class LoginActivity : AppCompatActivity() {
     setContentView(R.layout.activity_login)
 
     btn_login.setOnClickListener { it ->
-      FirebaseAuth.getInstance().rxSignInAnonymously()
+      var email = edit_email.text.toString()
+      var password = edit_password.text.toString()
+      FirebaseAuth.getInstance().rxSignInWithEmailAndPassword(email, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .flatMap { it.rxGetIdToken(true) }

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "701687882314-46qhs69vgue857dcocorle5l6uidca46.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cheongmin.voicereader",
+            "certificate_hash": "a09850292dfeedba8d74830226184da28f31095d"
+          }
+        },
+        {
           "client_id": "701687882314-q8d7ho34hhvfrcveib46gdio3gmfi6qs.apps.googleusercontent.com",
           "client_type": 3
         }

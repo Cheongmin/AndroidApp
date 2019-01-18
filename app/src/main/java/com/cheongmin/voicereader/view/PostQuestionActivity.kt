@@ -1,12 +1,13 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.cheongmin.voicereader.dialog.RecordDialog
-import com.cheongmin.voicereader.dialog.RecordDialogListener
+import com.cheongmin.voicereader.R
+import com.cheongmin.voicereader.view.dialog.RecordDialog
+import com.cheongmin.voicereader.view.dialog.RecordDialogListener
 import kotlinx.android.synthetic.main.activity_post_question.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 

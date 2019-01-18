@@ -1,4 +1,4 @@
-package com.cheongmin.voicereader.dialog
+package com.cheongmin.voicereader.view.dialog
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment

@@ -1,14 +1,13 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.adapter.AnswerAdapter
 import com.cheongmin.voicereader.model.Answer
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_post_answer.*
 import kotlinx.android.synthetic.main.include_toolbar.*
-import com.cheongmin.voicereader.R.id.scroll
 
 
 class PostAnswerActivity : AppCompatActivity() {

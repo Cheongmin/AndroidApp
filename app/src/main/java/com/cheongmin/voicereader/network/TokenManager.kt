@@ -5,7 +5,6 @@ import android.preference.PreferenceManager
 import com.cheongmin.voicereader.SingletonHolder
 import com.cheongmin.voicereader.api.AuthorizationAPI
 import com.cheongmin.voicereader.model.AccessToken
-import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -24,19 +23,19 @@ class TokenManager private constructor(context: Context) {
     return preference.getString(REFRESH_TOKEN, "")
   }
 
-  fun setToken(token: AccessToken) {
-    preference.edit()
-      .putString(ACCESS_TOKEN, token.token)
-      .putString(REFRESH_TOKEN, token.refreshToken)
-      .commit()
-  }
-
   fun setAccessToken(token: String) {
     preference.edit().putString(ACCESS_TOKEN, token).commit()
   }
 
   fun setRefreshToken(refreshToken: String) {
     preference.edit().putString(ACCESS_TOKEN, refreshToken).commit()
+  }
+
+  fun setToken(token: AccessToken) {
+    preference.edit()
+      .putString(ACCESS_TOKEN, token.token)
+      .putString(REFRESH_TOKEN, token.refreshToken)
+      .commit()
   }
 
   fun hasToken(): Boolean {

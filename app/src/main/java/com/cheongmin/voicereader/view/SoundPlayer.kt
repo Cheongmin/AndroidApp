@@ -1,6 +1,5 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.view
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
@@ -8,14 +7,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.SeekBar
 import kotlinx.android.synthetic.main.layout_sound_player.view.*
-import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.transition.ChangeBounds
-import android.transition.TransitionManager
-import android.util.Log
 import android.util.TypedValue
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.BounceInterpolator
-import android.widget.Toast
+import com.cheongmin.voicereader.R
 
 
 class SoundPlayer

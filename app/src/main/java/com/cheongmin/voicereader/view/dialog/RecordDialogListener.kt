@@ -1,4 +1,4 @@
-package com.cheongmin.voicereader.dialog
+package com.cheongmin.voicereader.view.dialog
 
 interface RecordDialogListener {
   fun onSuccessful()

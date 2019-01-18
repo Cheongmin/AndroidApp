@@ -1,8 +1,9 @@
-package com.cheongmin.voicereader
+package com.cheongmin.voicereader.view
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.cheongmin.voicereader.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
