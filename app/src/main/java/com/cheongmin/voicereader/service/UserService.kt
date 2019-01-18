@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface UserService {
   @POST("users/")
-  fun newUsers(
+  fun newUser(
     @Body
     body: UserRequest
   ): Single<User>

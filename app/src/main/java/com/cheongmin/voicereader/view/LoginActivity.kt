@@ -1,15 +1,14 @@
 package com.cheongmin.voicereader.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
+import android.util.Log
 import com.androidhuman.rxfirebase2.auth.*
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.api.AuthorizationAPI
 import com.cheongmin.voicereader.network.TokenManager
-import com.firebase.ui.auth.IdpResponse
+import com.cheongmin.voicereader.network.client.ApiClient
 import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,45 +20,36 @@ class LoginActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
 
-    btn_login.setOnClickListener { it ->
+    btn_login.setOnClickListener {
       var email = edit_email.text.toString()
       var password = edit_password.text.toString()
-      FirebaseAuth.getInstance().rxSignInWithEmailAndPassword(email, password)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .flatMap { it.rxGetIdToken(true) }
-        .subscribe({
-          Toast.makeText(applicationContext, it, Toast.LENGTH_LONG).show()
-        }, {
-          Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
-        })
+
+      //TODO: Validate Email and Password
+      handleLogin(email, password)
     }
   }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
+  private fun handleLogin(email: String, password: String) {
+    val tokenManager = TokenManager.getInstance(applicationContext)
 
-    if (requestCode != RC_SIGN_IN)
-      return
-
-    val response: IdpResponse = IdpResponse.fromResultIntent(data)!!
-
-    if (resultCode != Activity.RESULT_OK)
-      return
-
-    RxFirebaseAuth.getCurrentUser(FirebaseAuth.getInstance())
-      .flatMapSingle { user -> RxFirebaseUser.getIdToken(user, true) }
-      .flatMap { idToken -> AuthorizationAPI.fetchAccessToken(idToken) }
+    FirebaseAuth.getInstance().rxSignInWithEmailAndPassword(email, password)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
-      .subscribe({
-        TokenManager.getInstance(applicationContext).setToken(it)
+      .flatMap { user -> user.rxGetIdToken(true) }
+      .flatMap { token -> AuthorizationAPI.fetchAccessToken(token) }
+      .subscribe({ accessToken ->
+        tokenManager.setToken(accessToken)
+        ApiClient.init(accessToken.token)
+        navigateToMainActivity()
       }, {
         throw it
       })
   }
 
-  companion object {
-    const val RC_SIGN_IN = 100
+  private fun navigateToMainActivity() {
+    val intent = Intent(this, MainActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+    startActivity(intent)
+    finish()
   }
 }

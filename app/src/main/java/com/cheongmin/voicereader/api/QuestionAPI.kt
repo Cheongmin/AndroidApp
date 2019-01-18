@@ -17,8 +17,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .newQuestion(sound, json)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -31,8 +31,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .fetchQuestions(offset, size)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -45,8 +45,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .fetchQuestionById(questionId)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -59,8 +59,8 @@ object QuestionAPI {
     return Completable.create { emitter ->
       ApiClient.questionService
         .removeQuestion(questionId)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onComplete()
         }, {
@@ -73,8 +73,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .newAnswer(questionId, body)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -87,8 +87,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .fetchAnswersByQuestionId(questionId)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -101,8 +101,8 @@ object QuestionAPI {
     return Single.create { emitter ->
       ApiClient.questionService
         .fetchAnswerById(questionId, answerId)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onSuccess(it)
         }, {
@@ -115,8 +115,8 @@ object QuestionAPI {
     return Completable.create { emitter ->
       ApiClient.questionService
         .removeAnswer(questionId, answerId)
-        .observeOn(Schedulers.io())
-        .subscribeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
           emitter.onComplete()
         }, {

@@ -46,7 +46,7 @@ object RetrofitManager {
 
   private fun createTokenProvidingInterceptor(token: String) = Interceptor { chain ->
     chain.proceed(chain.request().newBuilder()
-      .addHeader("Authorization", token)
+      .addHeader("Authorization", "Bearer $token")
       .build())
   }
 
@@ -54,7 +54,7 @@ object RetrofitManager {
     level = HttpLoggingInterceptor.Level.BODY
   }
 
-//  internal fun <T> create(service: Class<T>): T {
-//    return retrofit.create(service)
+//  internal fun <T> create(authService: Class<T>): T {
+//    return retrofit.create(authService)
 //  }
 }

@@ -3,7 +3,12 @@ package com.cheongmin.voicereader.view
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.cheongmin.voicereader.R
+import com.cheongmin.voicereader.api.QuestionAPI
+import com.cheongmin.voicereader.api.UserAPI
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -18,6 +23,13 @@ class MainActivity : AppCompatActivity() {
     setupProfile()
     setupWelcomeMessage()
     setupInformation()
+
+    QuestionAPI.fetchQuestions(0, 10)
+      .subscribe({
+        Toast.makeText(applicationContext, it.size.toString(), Toast.LENGTH_LONG).show()
+      }, {
+        throw it
+      })
 
     btn_show_post_answer.setOnClickListener {
       val intent = Intent(this, PostAnswerActivity::class.java)

@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 object AuthorizationAPI {
   fun fetchAccessToken(idToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      AuthClient.service
+      AuthClient.authService
         .fetchAccessToken(idToken)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -23,7 +23,7 @@ object AuthorizationAPI {
 
   fun refreshAccessToken(refreshToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      AuthClient.service
+      AuthClient.authService
         .refreshAccessToken("Bearer $refreshToken")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

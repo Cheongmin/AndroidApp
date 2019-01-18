@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.auth0.android.jwt.JWT
-import com.cheongmin.voicereader.BuildConfig
 import com.cheongmin.voicereader.R
-import com.cheongmin.voicereader.network.RetrofitManager
 import com.cheongmin.voicereader.network.TokenManager
+import com.cheongmin.voicereader.network.client.ApiClient
+import com.cheongmin.voicereader.network.client.AuthClient
 
 class SplashActivity : AppCompatActivity() {
 
@@ -15,45 +15,36 @@ class SplashActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_splash)
 
-    // init retrofit builder without token for request access token
-    RetrofitManager.init()
-
-    // debug login
-    if (BuildConfig.DEBUG) {
-      showLoginActivity()
-      return
-    }
+    AuthClient.init()
 
     val tokenManager = TokenManager.getInstance(applicationContext)
-    if (tokenManager.hasRefreshToken()) {
-      val refreshToken = tokenManager.getRefreshToken()
-      val isExpired = JWT(refreshToken).isExpired(0)
-      if (!isExpired) {
-        // Fetch new token by refresh token
-        tokenManager.refreshToken()
-          .subscribe({
-            RetrofitManager.initWithToken(it)
-            showMainActivity()
-          }, {
-            throw it
-          })
-      } else {
-        showLoginActivity()
+
+    val hasToken = tokenManager.hasToken() && tokenManager.hasRefreshToken()
+    if (hasToken) {
+      val token = tokenManager.getToken()
+
+      val isExpired = JWT(token).isExpired(0)
+      if (isExpired) {
+        navigateToLoginActivity()
+        return
       }
 
+      ApiClient.init(token)
+      navigateToMainActivity()
+
     } else {
-      showLoginActivity()
+      navigateToLoginActivity()
     }
   }
 
-  private fun showMainActivity() {
+  private fun navigateToMainActivity() {
     val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
     startActivity(intent)
     finish()
   }
 
-  private fun showLoginActivity() {
+  private fun navigateToLoginActivity() {
     val intent = Intent(this, LoginActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
     startActivity(intent)
