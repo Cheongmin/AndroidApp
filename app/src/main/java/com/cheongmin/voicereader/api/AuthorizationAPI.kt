@@ -1,8 +1,7 @@
 package com.cheongmin.voicereader.api
 
 import com.cheongmin.voicereader.model.response.AccessToken
-import com.cheongmin.voicereader.network.RetrofitManager
-import com.cheongmin.voicereader.service.AuthorizationService
+import com.cheongmin.voicereader.network.client.AuthClient
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -10,8 +9,8 @@ import io.reactivex.schedulers.Schedulers
 object AuthorizationAPI {
   fun fetchAccessToken(idToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      val apiClient = RetrofitManager.create(AuthorizationService::class.java)
-      apiClient.fetchAccessToken(idToken)
+      AuthClient.service
+        .fetchAccessToken(idToken)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
@@ -24,8 +23,8 @@ object AuthorizationAPI {
 
   fun refreshAccessToken(refreshToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      val apiClient = RetrofitManager.create(AuthorizationService::class.java)
-      apiClient.refreshAccessToken("Bearer $refreshToken")
+      AuthClient.service
+        .refreshAccessToken("Bearer $refreshToken")
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({

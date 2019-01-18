@@ -4,6 +4,7 @@ import com.cheongmin.voicereader.model.response.Answer
 import com.cheongmin.voicereader.model.request.AnswerRequest
 import com.cheongmin.voicereader.model.response.Question
 import com.cheongmin.voicereader.network.RetrofitManager
+import com.cheongmin.voicereader.network.client.ApiClient
 import com.cheongmin.voicereader.service.QuestionService
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -14,7 +15,7 @@ import okhttp3.MultipartBody
 object QuestionAPI {
   fun newQuestion(sound: MultipartBody.Part, json: MultipartBody.Part): Single<Question> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .newQuestion(sound, json)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -28,7 +29,7 @@ object QuestionAPI {
 
   fun fetchQuestions(offset: Int, size: Int): Single<List<Question>> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .fetchQuestions(offset, size)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -42,7 +43,7 @@ object QuestionAPI {
 
   fun fetchQuestionById(questionId: String): Single<Question> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .fetchQuestionById(questionId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -56,7 +57,7 @@ object QuestionAPI {
 
   fun removeQuestion(questionId: String): Completable {
     return Completable.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .removeQuestion(questionId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -70,7 +71,7 @@ object QuestionAPI {
 
   fun newAnswer(questionId: String, body: AnswerRequest): Single<Answer> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .newAnswer(questionId, body)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -84,7 +85,7 @@ object QuestionAPI {
 
   fun fetchAnswersByQuestionId(questionId: String): Single<List<Answer>> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .fetchAnswersByQuestionId(questionId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -98,7 +99,7 @@ object QuestionAPI {
 
   fun fetchAnswerById(questionId: String, answerId: String): Single<Answer> {
     return Single.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .fetchAnswerById(questionId, answerId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -112,7 +113,7 @@ object QuestionAPI {
 
   fun removeAnswer(questionId: String, answerId: String): Completable {
     return Completable.create { emitter ->
-      RetrofitManager.create(QuestionService::class.java)
+      ApiClient.questionService
         .removeAnswer(questionId, answerId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())

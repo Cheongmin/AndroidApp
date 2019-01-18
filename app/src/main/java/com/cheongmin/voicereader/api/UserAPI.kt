@@ -4,6 +4,7 @@ import com.cheongmin.voicereader.model.response.Photo
 import com.cheongmin.voicereader.model.response.User
 import com.cheongmin.voicereader.model.request.UserRequest
 import com.cheongmin.voicereader.network.RetrofitManager
+import com.cheongmin.voicereader.network.client.ApiClient
 import com.cheongmin.voicereader.service.UserService
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,7 +14,7 @@ import okhttp3.MultipartBody
 object UserAPI {
   fun newUsers(body: UserRequest): Single<User> {
     return Single.create { emitter ->
-      RetrofitManager.create(UserService::class.java)
+      ApiClient.userService
         .newUsers(body)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -27,7 +28,7 @@ object UserAPI {
 
   fun updateUser(userId: String, body: UserRequest): Single<User> {
     return Single.create { emitter ->
-      RetrofitManager.create(UserService::class.java)
+      ApiClient.userService
         .updateUser(userId, body)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -41,7 +42,7 @@ object UserAPI {
 
   fun uploadUserPhoto(userId: String, photo: MultipartBody.Part): Single<Photo> {
     return Single.create { emitter ->
-      RetrofitManager.create(UserService::class.java)
+      ApiClient.userService
         .uploadUserPhoto(userId, photo)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())
@@ -55,7 +56,7 @@ object UserAPI {
 
   fun fetchUser(userId: String): Single<User> {
     return Single.create { emitter ->
-      RetrofitManager.create(UserService::class.java)
+      ApiClient.userService
         .fetchUser(userId)
         .observeOn(Schedulers.io())
         .subscribeOn(AndroidSchedulers.mainThread())

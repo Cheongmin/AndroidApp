@@ -10,10 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
   private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com/api/v1/"
-  private lateinit var retrofit: Retrofit
 
-  fun init() {
-    retrofit = Retrofit.Builder().apply {
+  fun create(): Retrofit {
+    return Retrofit.Builder().apply {
       baseUrl(API_HOST)
       client(setupOkHttpClient())
       addConverterFactory(GsonConverterFactory.create())
@@ -21,8 +20,8 @@ object RetrofitManager {
     }.build()
   }
 
-  fun initWithToken(token: String) {
-    retrofit = Retrofit.Builder().apply {
+  fun createWithToken(token: String): Retrofit {
+    return Retrofit.Builder().apply {
       baseUrl(API_HOST)
       client(setupOkHttpClientWithToken(token))
       addConverterFactory(GsonConverterFactory.create())
@@ -55,8 +54,7 @@ object RetrofitManager {
     level = HttpLoggingInterceptor.Level.BODY
   }
 
-  internal fun <T> create(service: Class<T>): T {
-    return retrofit.create(service)
-  }
-
+//  internal fun <T> create(service: Class<T>): T {
+//    return retrofit.create(service)
+//  }
 }
