@@ -24,7 +24,8 @@ class LoginActivity : AppCompatActivity() {
       var email = edit_email.text.toString()
       var password = edit_password.text.toString()
 
-      //TODO: Validate Email and Password
+      //TODO: Implement Validate Email and Password
+
       handleLogin(email, password)
     }
   }

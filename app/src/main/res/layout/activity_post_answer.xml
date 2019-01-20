@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".view.PostAnswerActivity">
+    tools:context=".view.QuestionActivity">
 
     <include layout="@layout/include_toolbar" />
 
@@ -24,7 +24,7 @@
 
             <include
                 android:id="@+id/question_view"
-                layout="@layout/layout_question" />
+                layout="@layout/layout_question_detail" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_answers"

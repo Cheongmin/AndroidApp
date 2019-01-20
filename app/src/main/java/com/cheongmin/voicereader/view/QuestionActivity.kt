@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_post_answer.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 
-class PostAnswerActivity : AppCompatActivity() {
+class QuestionActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
