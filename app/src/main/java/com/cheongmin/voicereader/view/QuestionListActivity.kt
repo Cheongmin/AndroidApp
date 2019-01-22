@@ -1,7 +1,9 @@
 package com.cheongmin.voicereader.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.adapter.QuestionAdapter
@@ -31,7 +33,13 @@ class QuestionListActivity : AppCompatActivity() {
   }
 
   private fun setupQuestionList() {
-    val adapter = QuestionAdapter()
+    val adapter = QuestionAdapter {
+      val intent = Intent(applicationContext, QuestionActivity::class.java)
+      intent.putExtra("dataSource", it)
+
+      startActivity(intent)
+    }
+
     rv_questions.adapter = adapter
 
     QuestionAPI.fetchQuestions(0, 10)

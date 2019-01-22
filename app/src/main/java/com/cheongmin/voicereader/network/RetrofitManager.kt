@@ -39,8 +39,7 @@ object RetrofitManager {
   private fun setupOkHttpClientWithToken(token: String): OkHttpClient {
     return OkHttpClient.Builder().apply {
       addInterceptor(createTokenProvidingInterceptor(token))
-      if (BuildConfig.DEBUG)
-        addInterceptor(createHttpLoggingInterceptor())
+      addInterceptor(createHttpLoggingInterceptor())
     }.build()
   }
 

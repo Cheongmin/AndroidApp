@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.model.response.Answer
+import com.cheongmin.voicereader.utils.DateUtils
 import kotlinx.android.synthetic.main.layout_answer.view.*
 
 class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {
@@ -27,7 +28,7 @@ class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {
       //tv_user_name.text
       tv_location.text = "경기도 의정부시"
 
-      tv_submit_date.text = answer.createdDate.toString()
+      tv_submit_date.text = DateUtils.getDateString(answer.createdDate)
       tv_content.text = answer.contents
     }
   }

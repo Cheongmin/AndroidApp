@@ -38,21 +38,21 @@ interface QuestionService {
     question_id: String
   ): Completable
 
-  @POST("/questions/{question_id}/answers")
+  @POST("questions/{question_id}/answers")
   fun newAnswer(
     @Path("question_id")
     question_id: String,
     @Body
-    body: AnswerRequest
+    content: AnswerRequest
   ): Single<Answer>
 
-  @GET("/questions/{question_id}/answers")
+  @GET("questions/{question_id}/answers")
   fun fetchAnswersByQuestionId(
     @Path("question_id")
     question_id: String
   ): Single<List<Answer>>
 
-  @GET("/questions/{question_id}/answers/{answer_id}")
+  @GET("questions/{question_id}/answers/{answer_id}")
   fun fetchAnswerById(
     @Path("question_id")
     question_id: String,
@@ -60,7 +60,7 @@ interface QuestionService {
     answer_id: String
   ): Single<Answer>
 
-  @DELETE("/questions/{question_id}/answers/{answer_id}")
+  @DELETE("questions/{question_id}/answers/{answer_id}")
   fun removeAnswer(
     @Path("question_id")
     question_id: String,

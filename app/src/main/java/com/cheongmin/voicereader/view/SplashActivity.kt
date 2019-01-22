@@ -3,6 +3,7 @@ package com.cheongmin.voicereader.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.network.TokenManager
@@ -30,6 +31,8 @@ class SplashActivity : AppCompatActivity() {
       }
 
       ApiClient.init(token)
+      Log.i("Token", token)
+
       navigateToMainActivity()
 
     } else {

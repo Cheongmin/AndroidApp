@@ -1,6 +1,6 @@
 package com.cheongmin.voicereader.model.response
-
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Question(
   @SerializedName("_id")
@@ -18,6 +18,7 @@ data class Question(
   @SerializedName("subtitles")
   var subtitle: String,
 
-  @SerializedName("writer_id")
-  var writerId: String
-)
+  @SerializedName("writer")
+  var writer: User
+
+) : Serializable

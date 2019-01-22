@@ -1,6 +1,7 @@
 package com.cheongmin.voicereader.model.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
   @SerializedName("_id")
@@ -12,9 +13,12 @@ data class User(
   @SerializedName("display_name")
   var displayName: String,
 
+  @SerializedName("picture")
+  val profileUri: String,
+
   @SerializedName("email")
   var email: String,
 
   @SerializedName("fcm_uid")
   var fcmUid: String
-)
+) : Serializable
