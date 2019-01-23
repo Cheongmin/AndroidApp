@@ -20,5 +20,9 @@ data class User(
   var email: String,
 
   @SerializedName("fcm_uid")
-  var fcmUid: String
+  var fcmUid: String,
+
+  @SerializedName("location")
+  var location: String
+
 ) : Serializable

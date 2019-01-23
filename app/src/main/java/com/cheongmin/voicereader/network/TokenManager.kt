@@ -15,21 +15,19 @@ const val REFRESH_TOKEN = "auth.refresh_token"
 class TokenManager private constructor(context: Context) {
   private val preference = PreferenceManager.getDefaultSharedPreferences(context)
 
-  fun getToken(): String {
-    return preference.getString(ACCESS_TOKEN, "")
-  }
+  var token = preference.getString(ACCESS_TOKEN, "")!!
+    set(value) {
+      preference.edit()
+        .putString(ACCESS_TOKEN, value)
+        .commit()
+    }
 
-  fun getRefreshToken(): String {
-    return preference.getString(REFRESH_TOKEN, "")
-  }
-
-  fun setAccessToken(token: String) {
-    preference.edit().putString(ACCESS_TOKEN, token).commit()
-  }
-
-  fun setRefreshToken(refreshToken: String) {
-    preference.edit().putString(ACCESS_TOKEN, refreshToken).commit()
-  }
+  var refreshToken = preference.getString(REFRESH_TOKEN, "")!!
+    set(value) {
+      preference.edit()
+        .putString(REFRESH_TOKEN, value)
+        .commit()
+    }
 
   fun setToken(token: AccessToken) {
     preference.edit()
@@ -39,16 +37,20 @@ class TokenManager private constructor(context: Context) {
   }
 
   fun hasToken(): Boolean {
-    return !getToken().isNullOrBlank()
+    return !token.isNullOrBlank()
   }
 
   fun hasRefreshToken(): Boolean {
-    return !getToken().isNullOrBlank()
+    return !refreshToken.isNullOrBlank()
+  }
+
+  fun isExists(): Boolean {
+    return hasToken() && hasRefreshToken()
   }
 
   fun refreshToken(): Single<String> {
     return Single.create { emitter ->
-      AuthorizationAPI.refreshAccessToken(getRefreshToken())
+      AuthorizationAPI.refreshAccessToken(refreshToken)
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe({

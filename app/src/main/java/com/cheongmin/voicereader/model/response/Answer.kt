@@ -16,5 +16,8 @@ data class Answer(
   var questionId: String,
 
   @SerializedName("writer_id")
-  var writerId: String
+  var writerId: String,
+
+  @SerializedName("writer")
+  var writer: User
 )

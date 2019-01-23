@@ -6,6 +6,9 @@ data class Question(
   @SerializedName("_id")
   var id: String,
 
+  @SerializedName("title")
+  var title: String,
+
   @SerializedName("contents")
   var contents: String,
 

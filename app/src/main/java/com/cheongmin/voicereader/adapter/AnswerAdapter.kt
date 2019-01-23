@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.model.response.Answer
 import com.cheongmin.voicereader.utils.DateUtils
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_answer.view.*
+import java.util.*
 
 class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {
 
@@ -23,13 +25,17 @@ class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {
 
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(answer: Answer) = with(itemView) {
-      //TODO: writer_id로부터 사용자 정보를 가져와야함
-      //iv_user_profile
-      //tv_user_name.text
-      tv_location.text = "경기도 의정부시"
+      tv_answer_user_name.text = answer.writer.displayName
+      tv_answer_location.text = answer.writer.location
 
-      tv_submit_date.text = DateUtils.getDateString(answer.createdDate)
-      tv_content.text = answer.contents
+      tv_answer_content.text = answer.contents
+      tv_answer_date.text = DateUtils.getDateString(answer.createdDate)
+
+      if(!answer.writer.profileUri.isNullOrEmpty()) {
+        Picasso.get().load(answer.writer.profileUri).into(iv_answer_user_profile)
+      } else {
+        Picasso.get().load("https://app.voxeet.com/images/user-placeholder.png").into(iv_answer_user_profile)
+      }
     }
   }
 }

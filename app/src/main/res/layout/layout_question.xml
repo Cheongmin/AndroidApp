@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_question"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="16dp"
@@ -16,17 +15,55 @@
         android:id="@+id/tv_question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorGray9"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_question_user_profile"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_question_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_question_title" />
 
     <TextView
         android:id="@+id/tv_question_user_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="4dp"
-        android:textSize="14sp" />
+        android:layout_marginStart="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorGray7"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_question_user_profile"
+        app:layout_constraintStart_toEndOf="@+id/iv_question_user_profile"
+        app:layout_constraintTop_toTopOf="@+id/iv_question_user_profile" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_question_user_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorGray6"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_question_user_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_question_user_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_question_user_name" />
+
+    <TextView
+        android:id="@+id/tv_question_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/colorGray6"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_question_user_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_question_user_location" />
+
+</android.support.constraint.ConstraintLayout>
