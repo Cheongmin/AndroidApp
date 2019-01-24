@@ -3,6 +3,7 @@ package com.cheongmin.voicereader.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.R
@@ -34,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
       }
 
       ApiClient.init(token)
+      Log.i("Token", token)
 
       val id = jwt.getClaim("sub").asString()
       id?.let {
