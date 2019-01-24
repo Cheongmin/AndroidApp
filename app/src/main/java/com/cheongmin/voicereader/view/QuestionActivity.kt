@@ -31,6 +31,7 @@ class QuestionActivity : AppCompatActivity() {
     dataSource.let {
       setupQuestion(it)
       setupAnswerList(it)
+      setupSoundPlayer(it)
     }
 
     Log.i("Question ID", dataSource.id)
@@ -80,6 +81,11 @@ class QuestionActivity : AppCompatActivity() {
     sv_content.post {
       sv_content.fullScroll(View.FOCUS_UP)
     }
+  }
+
+  private fun setupSoundPlayer(question: Question) {
+    sound_player.uri = question.soundUri
+    sound_player.subtitles = question.subtitle
   }
 
   private fun postAnswer(content: String) {

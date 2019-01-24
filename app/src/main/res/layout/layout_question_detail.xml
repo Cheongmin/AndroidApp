@@ -80,6 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_question_user_location" />
 
     <com.cheongmin.voicereader.view.SoundPlayer
+        android:id="@+id/sound_player"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
