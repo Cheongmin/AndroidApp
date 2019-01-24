@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.androidhuman.rxfirebase2.auth.*
+import com.auth0.android.jwt.JWT
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.api.AuthorizationAPI
+import com.cheongmin.voicereader.api.UserAPI
+import com.cheongmin.voicereader.model.response.AccessToken
 import com.cheongmin.voicereader.network.TokenManager
+import com.cheongmin.voicereader.network.UserManager
 import com.cheongmin.voicereader.network.client.ApiClient
 import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
@@ -38,9 +43,18 @@ class LoginActivity : AppCompatActivity() {
       .observeOn(AndroidSchedulers.mainThread())
       .flatMap { user -> user.rxGetIdToken(true) }
       .flatMap { token -> AuthorizationAPI.fetchAccessToken(token) }
-      .subscribe({ accessToken ->
-        tokenManager.setToken(accessToken)
-        ApiClient.init(accessToken.token)
+      .flatMap {
+        val userId = JWT(it.token).getClaim("sub").asString()
+        return@flatMap Single.just(Pair(it, userId))
+      }
+      .flatMap { (token: AccessToken, userId: String?) ->
+        tokenManager.setToken(token)
+        ApiClient.init(token.token)
+
+        return@flatMap UserAPI.fetchUser(userId!!)
+      }
+      .subscribe({
+        UserManager.user = it
         navigateToMainActivity()
       }, {
         throw it
