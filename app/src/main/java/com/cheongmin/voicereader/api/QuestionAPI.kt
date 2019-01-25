@@ -13,10 +13,10 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 
 object QuestionAPI {
-  fun newQuestion(sound: MultipartBody.Part, json: MultipartBody.Part): Single<Question> {
+  fun newQuestion(sound: MultipartBody.Part, title: MultipartBody.Part, contents: MultipartBody.Part, subtitles: MultipartBody.Part): Single<Question> {
     return Single.create { emitter ->
       ApiClient.questionService
-        .newQuestion(sound, json)
+        .newQuestion(sound, title, contents, subtitles)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
