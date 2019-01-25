@@ -27,6 +27,8 @@ class QuestionAdapter(
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(question: Question, clickListener: (item: Question) -> Unit) = with(itemView) {
       tv_question_title.text = question.title
+      tv_question_content.text = question.contents
+
       tv_question_date.text = DateUtils.getDateString(question.createdDate)
 
       tv_question_user_name.text = question.writer.displayName

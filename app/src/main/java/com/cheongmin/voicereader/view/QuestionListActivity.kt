@@ -33,6 +33,10 @@ class QuestionListActivity : AppCompatActivity() {
   }
 
   private fun setupQuestionList() {
+    refresh_layout.setOnRefreshListener {
+      refresh_layout.isRefreshing = false
+    }
+
     val adapter = QuestionAdapter {
       val intent = Intent(applicationContext, QuestionActivity::class.java)
       intent.putExtra("dataSource", it)

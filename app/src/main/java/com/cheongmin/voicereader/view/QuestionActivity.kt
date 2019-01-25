@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.adapter.AnswerAdapter
@@ -53,18 +54,22 @@ class QuestionActivity : AppCompatActivity() {
   }
 
   private fun setupQuestion(question: Question) {
-    tv_question_title.text = "글 제목"
+    tv_question_title.text = question.title
     tv_question_content.text = question.contents
     tv_question_date.text = DateUtils.getDateString(question.createdDate)
 
-    Picasso.get()
-      .load(question.writer.profileUri)
-      .resize(100, 100)
-      .centerCrop()
-      .into(iv_question_user_profile)
+    if(question.writer.profileUri.isNullOrEmpty()) {
+      Picasso.get()
+        .load("https://app.voxeet.com/images/user-placeholder.png")
+        .into(iv_question_user_profile)
+    } else {
+      Picasso.get()
+        .load(question.writer.profileUri)
+        .into(iv_question_user_profile)
+    }
 
     tv_question_user_name.text = question.writer.displayName
-    tv_question_user_location.text = "경기도 의정부시"
+    tv_question_user_location.text = question.writer.location
   }
 
   private fun setupAnswerList(question: Question) {
@@ -99,6 +104,7 @@ class QuestionActivity : AppCompatActivity() {
         rv_answers.scrollToPosition(adapter.itemCount)
 
         edit_answer.text.clear()
+        edit_answer.onEditorAction(EditorInfo.IME_ACTION_DONE)
       }, {
         Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
       })
