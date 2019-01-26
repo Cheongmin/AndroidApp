@@ -96,12 +96,12 @@ class QuestionActivity : AppCompatActivity() {
   private fun postAnswer(content: String) {
     QuestionAPI.newAnswer(dataSource.id, AnswerRequest(content))
       .subscribe({
-        val adapter = rv_answers.adapter as AnswerAdapter
-        adapter.addItem(it)
-        adapter.notifyItemInserted(adapter.itemCount)
+        //val adapter = rv_answers.adapter as AnswerAdapter
+        //adapter.addItem(it)
+        //adapter.notifyItemInserted(adapter.itemCount)
 
         //TODO: Fix ScrollView scroll to bottom
-        rv_answers.scrollToPosition(adapter.itemCount)
+        //rv_answers.scrollToPosition(adapter.itemCount)
 
         edit_answer.text.clear()
         edit_answer.onEditorAction(EditorInfo.IME_ACTION_DONE)
