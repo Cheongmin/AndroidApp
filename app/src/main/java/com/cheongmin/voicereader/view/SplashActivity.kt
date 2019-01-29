@@ -2,6 +2,7 @@ package com.cheongmin.voicereader.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
@@ -60,10 +61,13 @@ class SplashActivity : AppCompatActivity() {
   }
 
   private fun navigateToLoginActivity() {
-    val intent = Intent(this, LoginActivity::class.java)
-    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-    startActivity(intent)
-    finish()
+    Handler().postDelayed({
+      val intent = Intent(this, LoginActivity::class.java)
+      intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+      startActivity(intent)
+      finish()
+    }, 500)
+
   }
 
 }
