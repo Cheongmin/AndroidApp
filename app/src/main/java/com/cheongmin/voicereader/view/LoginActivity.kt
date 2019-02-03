@@ -39,6 +39,10 @@ class LoginActivity : AppCompatActivity() {
 
       handleLogin(email, password)
     }
+
+    tv_navigate_register.setOnClickListener {
+      navigateToRegisterActivity()
+    }
   }
 
   private fun handleLogin(email: String, password: String) {
@@ -89,6 +93,12 @@ class LoginActivity : AppCompatActivity() {
   private fun navigateToMainActivity() {
     val intent = Intent(this, MainActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+    startActivity(intent)
+    finish()
+  }
+
+  private fun navigateToRegisterActivity() {
+    val intent = Intent(this, RegisterActivity::class.java)
     startActivity(intent)
     finish()
   }

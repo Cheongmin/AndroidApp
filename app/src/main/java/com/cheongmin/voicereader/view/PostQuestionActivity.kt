@@ -21,9 +21,8 @@ import okhttp3.RequestBody
 import retrofit2.http.Multipart
 import java.io.File
 
-private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-
 class PostQuestionActivity : AppCompatActivity() {
+  private val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
   private var recordFileName: String? = null
 
@@ -63,7 +62,6 @@ class PostQuestionActivity : AppCompatActivity() {
       Toast.makeText(applicationContext, "녹음 권한을 허용하지 않으면 음성을 녹음 할 수 없습니다!", Toast.LENGTH_LONG).show()
     }
   }
-
 
   private fun setupActionBar() {
     setSupportActionBar(toolbar)

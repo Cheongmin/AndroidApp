@@ -79,6 +79,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <TextView
+        android:id="@+id/tv_navigate_find_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -106,6 +107,7 @@
 
 
     <TextView
+        android:id="@+id/tv_navigate_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
