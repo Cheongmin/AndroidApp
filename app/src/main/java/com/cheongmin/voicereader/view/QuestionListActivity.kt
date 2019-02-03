@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.adapter.QuestionAdapter
 import com.cheongmin.voicereader.api.QuestionAPI
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_question_list.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
@@ -23,12 +24,19 @@ class QuestionListActivity : AppCompatActivity() {
   private var isLoading = false
   private var isLastPage = false
 
+  private val compositeDisposable = CompositeDisposable()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_question_list)
 
     setupActionBar()
     setupQuestionList()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    compositeDisposable.dispose()
   }
 
   private fun setupActionBar() {
@@ -89,25 +97,27 @@ class QuestionListActivity : AppCompatActivity() {
     val offset = page * pagePerSize
     val size = pagePerSize
 
-    QuestionAPI.fetchQuestions(offset, size)
-      .subscribe({
-        if (it.isEmpty()) {
-          isLastPage = true
-          return@subscribe
-        }
+    compositeDisposable.add(
+      QuestionAPI.fetchQuestions(offset, size)
+        .subscribe({
+          if (it.isEmpty()) {
+            isLastPage = true
+            return@subscribe
+          }
 
-        adapter.addItems(it)
-        adapter.notifyItemRangeInserted(adapter.itemCount, size)
+          adapter.addItems(it)
+          adapter.notifyItemRangeInserted(adapter.itemCount, size)
 
-        isLoading = false
-        currentPage = page
+          isLoading = false
+          currentPage = page
 
-        if(refresh_layout.isRefreshing)
-          refresh_layout.isRefreshing = false
+          if(refresh_layout.isRefreshing)
+            refresh_layout.isRefreshing = false
 
-      }, {
-        throw it
-      })
+        }, {
+          throw it
+        })
+    )
   }
 
   private fun handleRefresh() {

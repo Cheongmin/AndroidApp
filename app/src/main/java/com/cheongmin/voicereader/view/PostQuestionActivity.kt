@@ -13,6 +13,7 @@ import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.api.QuestionAPI
 import com.cheongmin.voicereader.view.dialog.RecordDialog
 import com.cheongmin.voicereader.view.dialog.RecordDialogListener
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_post_question.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import okhttp3.MediaType
@@ -21,10 +22,11 @@ import okhttp3.RequestBody
 import retrofit2.http.Multipart
 import java.io.File
 
-class PostQuestionActivity : AppCompatActivity() {
-  private val REQUEST_RECORD_AUDIO_PERMISSION = 200
+private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
+class PostQuestionActivity : AppCompatActivity() {
   private var recordFileName: String? = null
+  private val compositeDisposable = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -32,7 +34,6 @@ class PostQuestionActivity : AppCompatActivity() {
 
     setupActionBar()
     setupRecord()
-    //TODO: dialog 결과(음성 파일, STT를 통해 인식된 내용)을 받아와야함
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,8 +60,13 @@ class PostQuestionActivity : AppCompatActivity() {
     }
 
     if(!permissionToRecordAccepted) {
-      Toast.makeText(applicationContext, "녹음 권한을 허용하지 않으면 음성을 녹음 할 수 없습니다!", Toast.LENGTH_LONG).show()
+      Toast.makeText(applicationContext, "녹음 권한을 허용하지 않으면 음성을 녹음 할 수 없습니다.", Toast.LENGTH_LONG).show()
     }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    compositeDisposable.dispose()
   }
 
   private fun setupActionBar() {
@@ -109,7 +115,7 @@ class PostQuestionActivity : AppCompatActivity() {
 
     val file = File(recordFileName)
 
-    QuestionAPI.newQuestion(
+    compositeDisposable.add(QuestionAPI.newQuestion(
       MultipartBody.Part.createFormData(
         "sound",
         file.name,
@@ -128,7 +134,7 @@ class PostQuestionActivity : AppCompatActivity() {
       finish()
     }, {
       throw it
-    })
+    }))
   }
 
   override fun onSupportNavigateUp(): Boolean {

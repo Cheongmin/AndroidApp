@@ -19,18 +19,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
+  private val compositeDisposable = CompositeDisposable()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_login)
 
     btn_login.setOnClickListener {
-      var email = edit_email.text.toString()
-      var password = edit_password.text.toString()
+      val email = edit_email.text.toString()
+      val password = edit_password.text.toString()
 
       //TODO: Implement Validate Email and Password
       edit_email.isEnabled = false
@@ -45,13 +48,19 @@ class LoginActivity : AppCompatActivity() {
     }
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    compositeDisposable.dispose()
+  }
+
   private fun handleLogin(email: String, password: String) {
     edit_email.isEnabled = false
     edit_password.isEnabled = false
     btn_login.isEnabled = false
 
     val tokenManager = TokenManager.getInstance(applicationContext)
-    FirebaseAuth.getInstance().rxSignInWithEmailAndPassword(email, password)
+    compositeDisposable.add(FirebaseAuth.getInstance()
+      .rxSignInWithEmailAndPassword(email, password)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .flatMap { user -> user.rxGetIdToken(true) }
@@ -63,10 +72,12 @@ class LoginActivity : AppCompatActivity() {
       .flatMap { (token: AccessToken, userId: String?) ->
         tokenManager.setToken(token)
         ApiClient.init(token.token)
-
         return@flatMap UserAPI.fetchUser(userId!!)
       }
-      .subscribe(this::handleLoginSuccess, this::handleLoginFailure)
+      .subscribe(
+        this::handleLoginSuccess,
+        this::handleLoginFailure
+      ))
   }
 
   private fun handleLoginSuccess(user: User) {

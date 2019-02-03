@@ -14,6 +14,7 @@ import com.cheongmin.voicereader.model.request.AnswerRequest
 import com.cheongmin.voicereader.model.response.Question
 import com.cheongmin.voicereader.utils.DateUtils
 import com.squareup.picasso.Picasso
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import kotlinx.android.synthetic.main.layout_question_detail.*
@@ -22,6 +23,8 @@ import kotlinx.android.synthetic.main.layout_question_detail.*
 class QuestionActivity : AppCompatActivity() {
 
   private lateinit var dataSource: Question
+
+  private val compositeDisposable = CompositeDisposable()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -43,6 +46,11 @@ class QuestionActivity : AppCompatActivity() {
     }
   }
 
+  override fun onDestroy() {
+    super.onDestroy()
+    compositeDisposable.dispose()
+  }
+
   private fun setupActionBar() {
     setSupportActionBar(toolbar)
 
@@ -58,11 +66,7 @@ class QuestionActivity : AppCompatActivity() {
     tv_question_content.text = question.contents
     tv_question_date.text = DateUtils.getDateString(question.createdDate)
 
-    if(question.writer.profileUri.isNullOrEmpty()) {
-      Picasso.get()
-        .load("https://app.voxeet.com/images/user-placeholder.png")
-        .into(iv_question_user_profile)
-    } else {
+    if(question.writer.profileUri.isNotEmpty()) {
       Picasso.get()
         .load(question.writer.profileUri)
         .into(iv_question_user_profile)
@@ -76,16 +80,15 @@ class QuestionActivity : AppCompatActivity() {
     val adapter = AnswerAdapter()
     rv_answers.adapter = adapter
 
-    QuestionAPI.fetchAnswersByQuestionId(question.id)
-      .subscribe({
-        adapter.addItems(it)
-        adapter.notifyDataSetChanged()
-      }, {
-      })
-
-    sv_content.post {
-      sv_content.fullScroll(View.FOCUS_UP)
-    }
+    compositeDisposable.add(
+      QuestionAPI.fetchAnswersByQuestionId(question.id)
+        .subscribe({
+          adapter.addItems(it)
+          adapter.notifyDataSetChanged()
+        }, {
+          throw it
+        })
+    )
   }
 
   private fun setupSoundPlayer(question: Question) {
@@ -94,20 +97,18 @@ class QuestionActivity : AppCompatActivity() {
   }
 
   private fun postAnswer(content: String) {
-    QuestionAPI.newAnswer(dataSource.id, AnswerRequest(content))
-      .subscribe({
-        //val adapter = rv_answers.adapter as AnswerAdapter
-        //adapter.addItem(it)
-        //adapter.notifyItemInserted(adapter.itemCount)
-
-        //TODO: Fix ScrollView scroll to bottom
-        //rv_answers.scrollToPosition(adapter.itemCount)
-
-        edit_answer.text.clear()
-        edit_answer.onEditorAction(EditorInfo.IME_ACTION_DONE)
-      }, {
-        Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
-      })
+    compositeDisposable.add(
+      QuestionAPI.newAnswer(dataSource.id, AnswerRequest(content))
+        .subscribe({
+          //val adapter = rv_answers.adapter as AnswerAdapter
+          //adapter.addItem(it)
+          //adapter.notifyItemInserted(adapter.itemCount)
+          edit_answer.text.clear()
+          edit_answer.onEditorAction(EditorInfo.IME_ACTION_DONE)
+        }, {
+          throw it
+        })
+    )
   }
 
   override fun onSupportNavigateUp(): Boolean {

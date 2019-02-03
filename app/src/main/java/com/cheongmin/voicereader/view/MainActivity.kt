@@ -3,6 +3,7 @@ package com.cheongmin.voicereader.view
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.api.QuestionAPI
@@ -20,9 +21,23 @@ class MainActivity : AppCompatActivity() {
 
     setupActionBar()
 
-    UserManager.user?.apply {
-      setupUser(this)
-    }
+    UserManager.user
+      ?.let(this::setupUser)
+      ?:run {
+        AlertDialog.Builder(applicationContext, R.style.VoiceReader_AlertDialog).apply {
+          setTitle("로그인 실패")
+          setMessage("로그인을 다시 진행해주세요.")
+          setCancelable(false)
+          setPositiveButton("확인") { dialog, _ ->
+            val intent = Intent(applicationContext, SplashActivity::class.java)
+            startActivity(intent)
+            dialog.dismiss()
+            finish()
+          }
+          show()
+        }
+      }
+
     setupInformation()
 
     btn_show_question_list.setOnClickListener {
@@ -47,18 +62,13 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setupUser(user: User) {
-    if (!user.profileUri.isNullOrEmpty()) {
+    if(user.profileUri.isNotEmpty()) {
       Picasso.get()
         .load(user.profileUri)
         .into(iv_user_profile)
-    } else {
-      Picasso.get()
-        .load("https://app.voxeet.com/images/user-placeholder.png")
-        .into(iv_user_profile)
     }
 
-    var message = "${user.displayName}님 안녕하세요\n"
-    tv_welcome_message.text = message
+    tv_welcome_message.text = "${user.displayName}님 안녕하세요\n"
   }
 
   private fun setupInformation() {
