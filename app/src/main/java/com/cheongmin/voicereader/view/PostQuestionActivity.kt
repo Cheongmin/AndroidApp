@@ -1,7 +1,6 @@
 package com.cheongmin.voicereader.view
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -19,12 +18,11 @@ import kotlinx.android.synthetic.main.include_toolbar.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Multipart
 import java.io.File
 
-private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-
 class PostQuestionActivity : AppCompatActivity() {
+  private val requestRecordAduioCode = 200
+
   private var recordFileName: String? = null
   private val compositeDisposable = CompositeDisposable()
 
@@ -53,7 +51,7 @@ class PostQuestionActivity : AppCompatActivity() {
   }
 
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-    val permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+    val permissionToRecordAccepted = if (requestCode == requestRecordAduioCode) {
       grantResults[0] == PackageManager.PERMISSION_GRANTED
     } else {
       false
@@ -83,7 +81,7 @@ class PostQuestionActivity : AppCompatActivity() {
     btn_show_record_dialog.setOnClickListener {
       val hasPermission = ActivityCompat.checkSelfPermission(applicationContext, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
       if (!hasPermission) {
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_RECORD_AUDIO_PERMISSION)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), requestRecordAduioCode)
         return@setOnClickListener
       }
 
