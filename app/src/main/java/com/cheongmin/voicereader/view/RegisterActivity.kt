@@ -19,7 +19,11 @@ class RegisterActivity : AppCompatActivity() {
 
   private fun setupViewPager() {
     viewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
-      val items = arrayOf(RegisterPolicyFragment(), RegisterPolicyFragment(), RegisterPolicyFragment())
+      val items = arrayOf(
+        RegisterPolicyFragment(),
+        RegisterAccountFragment(),
+        RegisterUserFragment(),
+        RegisterCompleteFragment())
 
       override fun getItem(position: Int): Fragment {
         return items[position]

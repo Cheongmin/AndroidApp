@@ -14,5 +14,9 @@
     <string name="answer_placeholder">답변을 여기에 입력하세요</string>
     <string name="button_post_answer">답변 작성</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_cancel">취소</string>
+    <string name="button_next">다음</string>
+    <string name="button_navigate_home">홈으로</string>
+    <string name="title_register_policy">이용약관</string>
+    <string name="title_register">회원가입</string>
 </resources>
