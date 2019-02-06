@@ -97,8 +97,9 @@ class PostQuestionActivity : AppCompatActivity() {
     val dialog = RecordDialog()
     dialog.arguments = argument
     dialog.listener = object : RecordDialogListener {
-      override fun onSuccessful(fileName: String) {
+      override fun onSuccessful(fileName: String, timeText: String) {
         recordFileName = fileName
+        btn_show_record_dialog.text = "$timeText 녹음됨"
       }
       override fun onCancel() {
       }

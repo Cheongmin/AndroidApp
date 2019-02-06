@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v4.app.ActivityCompat
 import android.util.Log
@@ -23,6 +24,9 @@ class RecordDialog : BottomSheetDialogFragment() {
   private var path: String? = null
 
   private val fileName: String = "recorded.mp3"
+
+  private var timeSeconds = 0
+  private val timeHandler = Handler()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.dialog_record, container, false)
@@ -45,6 +49,11 @@ class RecordDialog : BottomSheetDialogFragment() {
     }
   }
 
+  override fun onDestroy() {
+    timeHandler.removeCallbacksAndMessages(null)
+    super.onDestroy()
+  }
+
   private fun startRecording() {
     recorder = MediaRecorder().apply {
       setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -55,6 +64,15 @@ class RecordDialog : BottomSheetDialogFragment() {
       prepare()
       start()
     }
+
+    timeHandler.postDelayed(object: Runnable {
+      override fun run() {
+        timeSeconds += 1
+
+        tv_recorded_message.text = "%02d:%02d".format(timeSeconds/60, timeSeconds%60)
+        timeHandler.postDelayed(this, 1000)
+      }
+    }, 1000)
   }
 
   private fun stopRecording() {
@@ -64,7 +82,7 @@ class RecordDialog : BottomSheetDialogFragment() {
     }
     recorder = null
 
-    listener.onSuccessful("$path/$fileName")
+    listener.onSuccessful("$path/$fileName", tv_recorded_message.text.toString())
     this.dismiss()
   }
 
