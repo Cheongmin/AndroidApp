@@ -31,10 +31,8 @@ class AnswerAdapter : BaseAdapter<Answer, AnswerAdapter.ViewHolder>() {
       tv_answer_content.text = answer.contents
       tv_answer_date.text = DateUtils.getDateString(answer.createdDate)
 
-      if(!answer.writer.profileUri.isNullOrEmpty()) {
+      if(answer.writer.profileUri.isNotBlank()) {
         Picasso.get().load(answer.writer.profileUri).into(iv_answer_user_profile)
-      } else {
-        Picasso.get().load("https://app.voxeet.com/images/user-placeholder.png").into(iv_answer_user_profile)
       }
     }
   }

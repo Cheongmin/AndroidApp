@@ -1,6 +1,7 @@
 package com.cheongmin.voicereader.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -111,6 +112,16 @@ class PostQuestionActivity : AppCompatActivity() {
     val contents = edit_content.text.toString()
     val subtitles = "입력되지 않은 자막"
 
+    if(title.isBlank() || contents.isBlank()) {
+      Toast.makeText(applicationContext, "제목과 내용을 입력해주세요.", Toast.LENGTH_LONG).show()
+      return
+    }
+
+    if(recordFileName.isNullOrBlank()) {
+      Toast.makeText(applicationContext, "음성을 녹음해주세요.", Toast.LENGTH_LONG).show()
+      return
+    }
+
     val file = File(recordFileName)
 
     compositeDisposable.add(QuestionAPI.newQuestion(
@@ -126,9 +137,9 @@ class PostQuestionActivity : AppCompatActivity() {
       MultipartBody.Part.createFormData("contents", contents),
       MultipartBody.Part.createFormData("subtitles", subtitles)
     ).subscribe({
-//      val intent = Intent(applicationContext, QuestionActivity::class.java)
-//      intent.putExtra("dataSource", it)
-//      startActivity(intent)
+      val intent = Intent(applicationContext, QuestionActivity::class.java)
+      intent.putExtra("dataSource", it)
+      startActivity(intent)
       finish()
     }, {
       throw it

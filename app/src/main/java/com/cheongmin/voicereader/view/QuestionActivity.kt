@@ -100,9 +100,10 @@ class QuestionActivity : AppCompatActivity() {
     compositeDisposable.add(
       QuestionAPI.newAnswer(dataSource.id, AnswerRequest(content))
         .subscribe({
-          //val adapter = rv_answers.adapter as AnswerAdapter
-          //adapter.addItem(it)
-          //adapter.notifyItemInserted(adapter.itemCount)
+          val adapter = rv_answers.adapter as AnswerAdapter
+          adapter.addItem(it)
+          adapter.notifyItemInserted(adapter.itemCount)
+
           edit_answer.text.clear()
           edit_answer.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }, {

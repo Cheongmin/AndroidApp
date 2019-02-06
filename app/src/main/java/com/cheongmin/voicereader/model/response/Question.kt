@@ -22,6 +22,12 @@ data class Question(
   var subtitle: String,
 
   @SerializedName("writer")
-  var writer: User
+  var writer: User,
+
+  @SerializedName("num_of_answers")
+  var numOfAnswers: Int,
+
+  @SerializedName("num_of_view")
+  var numOfView: Int
 
 ) : Serializable

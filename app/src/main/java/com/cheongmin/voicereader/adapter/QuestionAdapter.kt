@@ -34,10 +34,11 @@ class QuestionAdapter(
       tv_question_user_name.text = question.writer.displayName
       tv_question_user_location.text = question.writer.location
 
-      if(!question.writer.profileUri.isNullOrEmpty()) {
+      tv_question_answers_count.text = "${question.numOfAnswers}개"
+      tv_question_view_count.text = "${question.numOfView}회"
+
+      if(question.writer.profileUri.isNotBlank()) {
         Picasso.get().load(question.writer.profileUri).into(iv_question_user_profile)
-      } else {
-        Picasso.get().load("https://app.voxeet.com/images/user-placeholder.png").into(iv_question_user_profile)
       }
 
       layout_question.setOnClickListener {
