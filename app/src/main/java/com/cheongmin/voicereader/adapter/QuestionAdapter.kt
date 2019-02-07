@@ -1,5 +1,6 @@
 package com.cheongmin.voicereader.adapter
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import com.cheongmin.voicereader.R
 import com.cheongmin.voicereader.model.response.Question
 import com.cheongmin.voicereader.utils.DateUtils
+import com.cheongmin.voicereader.view.ProfileActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_question.view.*
 

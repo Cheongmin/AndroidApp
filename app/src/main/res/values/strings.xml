@@ -19,4 +19,6 @@
     <string name="button_navigate_home">홈으로</string>
     <string name="title_register_policy">이용약관</string>
     <string name="title_register">회원가입</string>
+    <string name="title_profile">프로필</string>
+    <string name="navigate_back">뒤로가기</string>
 </resources>

@@ -66,6 +66,12 @@ class MainActivity : AppCompatActivity() {
       Picasso.get()
         .load(user.profileUri)
         .into(iv_user_profile)
+
+      iv_user_profile.setOnClickListener {
+        val intent = Intent(this, ProfileActivity::class.java)
+        intent.putExtra("dataSource", user)
+        startActivity(intent)
+      }
     }
 
     tv_welcome_message.text = "${user.displayName}님 안녕하세요\n"

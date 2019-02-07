@@ -1,5 +1,6 @@
 package com.cheongmin.voicereader.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -66,6 +67,12 @@ class QuestionActivity : AppCompatActivity() {
     tv_question_content.text = question.contents
     tv_question_date.text = DateUtils.getDateString(question.createdDate)
 
+    iv_question_user_profile.setOnClickListener {
+      val intent = Intent(this, ProfileActivity::class.java)
+      intent.putExtra("dataSource", question.writer)
+      startActivity(intent)
+    }
+
     if(question.writer.profileUri.isNotEmpty()) {
       Picasso.get()
         .load(question.writer.profileUri)
@@ -77,7 +84,11 @@ class QuestionActivity : AppCompatActivity() {
   }
 
   private fun setupAnswerList(question: Question) {
-    val adapter = AnswerAdapter()
+    val adapter = AnswerAdapter {
+      val intent = Intent(this, ProfileActivity::class.java)
+      intent.putExtra("dataSource", it)
+      startActivity(intent)
+    }
     rv_answers.adapter = adapter
 
     compositeDisposable.add(
