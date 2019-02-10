@@ -19,29 +19,29 @@ class TokenManager private constructor(context: Context) {
     set(value) {
       preference.edit()
         .putString(ACCESS_TOKEN, value)
-        .commit()
+        .apply()
     }
 
   var refreshToken = preference.getString(REFRESH_TOKEN, "")!!
     set(value) {
       preference.edit()
         .putString(REFRESH_TOKEN, value)
-        .commit()
+        .apply()
     }
 
   fun setToken(token: AccessToken) {
     preference.edit()
       .putString(ACCESS_TOKEN, token.token)
       .putString(REFRESH_TOKEN, token.refreshToken)
-      .commit()
+      .apply()
   }
 
-  fun hasToken(): Boolean {
-    return !token.isNullOrBlank()
+  private fun hasToken(): Boolean {
+    return !token.isBlank()
   }
 
-  fun hasRefreshToken(): Boolean {
-    return !refreshToken.isNullOrBlank()
+  private fun hasRefreshToken(): Boolean {
+    return !refreshToken.isBlank()
   }
 
   fun isExists(): Boolean {
@@ -60,6 +60,11 @@ class TokenManager private constructor(context: Context) {
           emitter.onError(it)
         })
     }
+  }
+
+  fun clear() {
+    token = ""
+    refreshToken = ""
   }
 
   companion object : SingletonHolder<TokenManager, Context>(::TokenManager)

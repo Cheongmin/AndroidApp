@@ -8,8 +8,10 @@ import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface UserService {
-  @POST("users/")
+  @POST("users")
   fun newUser(
+    @Header("Authorization")
+    idToken: String,
     @Body
     body: UserRequest
   ): Single<User>
@@ -23,7 +25,7 @@ interface UserService {
   ): Single<User>
 
   @Multipart
-  @POST("users/{userid}")
+  @POST("users/{userid}/photo")
   fun uploadUserPhoto(
     @Path("userid")
     userid: String,

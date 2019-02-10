@@ -11,42 +11,91 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/title_register"
+        android:layout_marginBottom="24dp"
+        android:text="프로필 설정"
         android:textColor="@color/colorGray9"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tv_cancel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_cancel"
+        android:id="@+id/tv_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="@string/button_cancel"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="건너뛰기"
         android:textColor="@color/colorGray9"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_title"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="이름"
+        android:textAlignment="center"
+        android:textColor="@color/colorGray9"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_profile" />
 
     <Button
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/style_flat_primary_button"
-        android:text="@string/button_next"
-        android:textStyle="bold"
-        android:textSize="14sp"
+        android:text="프로필 설정"
         android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="96dp" />
 
 
 </android.support.constraint.ConstraintLayout>

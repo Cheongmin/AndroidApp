@@ -14,7 +14,7 @@ data class User(
   var displayName: String,
 
   @SerializedName("picture")
-  val profileUri: String,
+  var profileUri: String,
 
   @SerializedName("email")
   var email: String,

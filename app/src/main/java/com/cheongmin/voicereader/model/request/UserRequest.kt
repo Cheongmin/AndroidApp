@@ -4,5 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class UserRequest(
   @SerializedName("display_name")
-  var displayName: String
+  var displayName: String,
+
+  @SerializedName("location")
+  var location: String
 )

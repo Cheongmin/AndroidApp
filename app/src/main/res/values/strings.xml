@@ -21,4 +21,6 @@
     <string name="title_register">회원가입</string>
     <string name="title_profile">프로필</string>
     <string name="navigate_back">뒤로가기</string>
+    <string name="text_policy_agree">모두 동의합니다.</string>
+    <string name="text_location_example">서울특별시 강동구</string>
 </resources>

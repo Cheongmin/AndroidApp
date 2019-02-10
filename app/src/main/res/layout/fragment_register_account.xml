@@ -1,51 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".view.RegisterAccountFragment">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/title_register"
-        android:textColor="@color/colorGray9"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tv_cancel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="@string/button_cancel"
-        android:textColor="@color/colorGray9"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_title" />
-
-    <Button
-        android:id="@+id/btn_next"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_flat_primary_button"
-        android:text="@string/button_next"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:isScrollContainer="true">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/title_register"
+            android:textColor="@color/colorGray9"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline10"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/button_cancel"
+            android:textColor="@color/colorGray9"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="이메일"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toTopOf="@+id/guideline10">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="비밀번호"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/layout_email"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_password_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="비밀번호 확인"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/layout_password"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_password_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="이름"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/layout_password_check"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="위치"
+            app:counterEnabled="false"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/layout_name"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_location_example"
+                android:inputType="text"
+                android:text="서울특별시 강남구" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_flat_primary_button"
+            android:text="회원가입"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="96dp" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

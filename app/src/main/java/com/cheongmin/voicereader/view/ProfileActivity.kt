@@ -19,7 +19,7 @@ class ProfileActivity : AppCompatActivity() {
     }
   }
 
-  fun setupProfile(user: User) {
+  private fun setupProfile(user: User) {
     if(user.profileUri.isNotBlank()) {
       Picasso.get().load(user.profileUri).into(iv_user_profile)
     }

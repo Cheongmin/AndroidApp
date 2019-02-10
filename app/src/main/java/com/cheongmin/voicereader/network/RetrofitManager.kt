@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitManager {
-  private const val API_HOST = "http://ec2-13-209-22-141.ap-northeast-2.compute.amazonaws.com/api/v1/"
+  private const val API_HOST = "http://ec2-13-125-242-211.ap-northeast-2.compute.amazonaws.com/api/v1/"
 
   fun create(): Retrofit {
     return Retrofit.Builder().apply {

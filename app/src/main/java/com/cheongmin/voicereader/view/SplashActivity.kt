@@ -23,6 +23,7 @@ class SplashActivity : AppCompatActivity() {
     AuthClient.init()
 
     val tokenManager = TokenManager.getInstance(applicationContext)
+//    tokenManager.clear()
 
     val hasToken = tokenManager.isExists()
     if (hasToken) {

@@ -111,6 +111,5 @@ class LoginActivity : AppCompatActivity() {
   private fun navigateToRegisterActivity() {
     val intent = Intent(this, RegisterActivity::class.java)
     startActivity(intent)
-    finish()
   }
 }

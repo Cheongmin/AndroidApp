@@ -11,10 +11,10 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
 
 object UserAPI {
-  fun newUser(body: UserRequest): Single<User> {
+  fun newUser(idToken: String, body: UserRequest): Single<User> {
     return Single.create { emitter ->
       AuthClient.userService
-        .newUser(body)
+        .newUser(idToken, body)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({

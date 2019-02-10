@@ -1,5 +1,6 @@
 package com.cheongmin.voicereader.view
 
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +11,13 @@ import com.cheongmin.voicereader.R.id.toolbar
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
+
+  var email: String = ""
+  var password: String = ""
+  var name: String = ""
+
+  var location: String? = null
+  var profile: Bitmap? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
