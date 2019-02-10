@@ -19,21 +19,21 @@ class TokenManager private constructor(context: Context) {
     set(value) {
       preference.edit()
         .putString(ACCESS_TOKEN, value)
-        .apply()
+        .commit()
     }
 
   var refreshToken = preference.getString(REFRESH_TOKEN, "")!!
     set(value) {
       preference.edit()
         .putString(REFRESH_TOKEN, value)
-        .apply()
+        .commit()
     }
 
   fun setToken(token: AccessToken) {
     preference.edit()
       .putString(ACCESS_TOKEN, token.token)
       .putString(REFRESH_TOKEN, token.refreshToken)
-      .apply()
+      .commit()
   }
 
   private fun hasToken(): Boolean {
