@@ -9,29 +9,31 @@ import io.reactivex.schedulers.Schedulers
 object AuthorizationAPI {
   fun fetchAccessToken(idToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      AuthClient.authService
-        .fetchAccessToken(idToken)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      AuthClient.authService?.run {
+        fetchAccessToken(idToken)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun refreshAccessToken(refreshToken: String): Single<AccessToken> {
     return Single.create { emitter ->
-      AuthClient.authService
-        .refreshAccessToken("Bearer $refreshToken")
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      AuthClient.authService?.run {
+        refreshAccessToken("Bearer $refreshToken")
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 }

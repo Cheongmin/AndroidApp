@@ -36,7 +36,7 @@ interface QuestionService {
     question_id: String
   ): Single<Question>
 
-  @DELETE("questions/{question_id}")
+  @HTTP(method="DELETE", path="questions/{question_id}", hasBody=true)
   fun removeQuestion(
     @Path("question_id")
     question_id: String

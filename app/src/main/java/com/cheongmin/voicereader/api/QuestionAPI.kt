@@ -15,36 +15,38 @@ import okhttp3.MultipartBody
 object QuestionAPI {
   fun newQuestion(sound: MultipartBody.Part, title: MultipartBody.Part, contents: MultipartBody.Part, subtitles: MultipartBody.Part): Single<Question> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .newQuestion(sound, title, contents, subtitles)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        newQuestion(sound, title, contents, subtitles)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun fetchQuestions(offset: Int, size: Int): Single<List<Question>> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .fetchQuestions(offset, size)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        fetchQuestions(offset, size)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun fetchQuestionById(questionId: String): Single<Question> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .fetchQuestionById(questionId)
+      ApiClient.questionService?.run {
+        fetchQuestionById(questionId)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe({
@@ -52,76 +54,82 @@ object QuestionAPI {
         }, {
           emitter.onError(it)
         })
+      }
     }
   }
 
   fun removeQuestion(questionId: String): Completable {
     return Completable.create { emitter ->
-      ApiClient.questionService
-        .removeQuestion(questionId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onComplete()
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        removeQuestion(questionId)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onComplete()
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun newAnswer(questionId: String, body: AnswerRequest): Single<Answer> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .newAnswer(questionId, body)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        newAnswer(questionId, body)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun fetchAnswersByQuestionId(questionId: String): Single<List<Answer>> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .fetchAnswersByQuestionId(questionId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        fetchAnswersByQuestionId(questionId)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun fetchAnswerById(questionId: String, answerId: String): Single<Answer> {
     return Single.create { emitter ->
-      ApiClient.questionService
-        .fetchAnswerById(questionId, answerId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        fetchAnswerById(questionId, answerId)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun removeAnswer(questionId: String, answerId: String): Completable {
     return Completable.create { emitter ->
-      ApiClient.questionService
-        .removeAnswer(questionId, answerId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onComplete()
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.questionService?.run {
+        removeAnswer(questionId, answerId)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onComplete()
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 }

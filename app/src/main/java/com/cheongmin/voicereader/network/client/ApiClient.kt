@@ -8,8 +8,8 @@ import retrofit2.Retrofit
 object ApiClient {
   private lateinit var retrofit: Retrofit
 
-  lateinit var userService: UserService
-  lateinit var questionService: QuestionService
+  var userService: UserService? = null
+  var questionService: QuestionService? = null
 
   fun init(token: String) {
     retrofit = RetrofitManager.createWithToken(token)

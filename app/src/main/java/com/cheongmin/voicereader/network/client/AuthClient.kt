@@ -6,15 +6,15 @@ import com.cheongmin.voicereader.service.UserService
 import retrofit2.Retrofit
 
 object AuthClient {
-  private lateinit var retrofit: Retrofit
+  private var retrofit: Retrofit? = null
 
-  lateinit var authService: AuthorizationService
-  lateinit var userService: UserService
+  var authService: AuthorizationService? = null
+  var userService: UserService? = null
 
   fun init() {
     retrofit = RetrofitManager.create()
 
-    authService = retrofit.create(AuthorizationService::class.java)
-    userService = retrofit.create(UserService::class.java)
+    authService = retrofit?.create(AuthorizationService::class.java)
+    userService = retrofit?.create(UserService::class.java)
   }
 }

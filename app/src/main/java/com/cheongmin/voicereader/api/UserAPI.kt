@@ -9,61 +9,69 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
+import java.lang.Exception
 
 object UserAPI {
   fun newUser(idToken: String, body: UserRequest): Single<User> {
     return Single.create { emitter ->
-      AuthClient.userService
-        .newUser(idToken, body)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      AuthClient.userService?.run {
+        newUser(idToken, body)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
+      AuthClient.userService ?: run {
+        emitter.onError(Exception("authClient not initialized"))
+      }
     }
   }
 
   fun updateUser(userId: String, body: UserRequest): Single<User> {
     return Single.create { emitter ->
-      ApiClient.userService
-        .updateUser(userId, body)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.userService?.run {
+        updateUser(userId, body)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun uploadUserPhoto(userId: String, photo: MultipartBody.Part): Single<Photo> {
     return Single.create { emitter ->
-      ApiClient.userService
-        .uploadUserPhoto(userId, photo)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.userService?.run {
+        uploadUserPhoto(userId, photo)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 
   fun fetchUser(userId: String): Single<User> {
     return Single.create { emitter ->
-      ApiClient.userService
-        .fetchUser(userId)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe({
-          emitter.onSuccess(it)
-        }, {
-          emitter.onError(it)
-        })
+      ApiClient.userService?.run {
+        fetchUser(userId)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe({
+            emitter.onSuccess(it)
+          }, {
+            emitter.onError(it)
+          })
+      }
     }
   }
 }
