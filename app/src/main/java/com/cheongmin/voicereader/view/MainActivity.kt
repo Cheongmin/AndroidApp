@@ -78,11 +78,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun setupInformation() {
-    //TODO: 알림 개수와 활동 점수를 로컬 DB와 서버로부터 받아오도록 수정해야함
     val notificationCount = 0
-    val actionPoint = 0
-
     tv_notification_count.text = notificationCount.toString()
-    tv_action_point.text = actionPoint.toString()
   }
 }

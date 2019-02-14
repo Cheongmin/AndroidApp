@@ -12,6 +12,9 @@ import android.widget.EditText
 import android.widget.TextView
 import com.cheongmin.voicereader.R
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.fragment_register_policy.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 
 class RegisterPolicyFragment : Fragment() {
@@ -25,26 +28,25 @@ class RegisterPolicyFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val btnNext = view.findViewById<Button>(R.id.btn_next)
-    btnNext.isEnabled = false
-    btnNext.setOnClickListener {
+    btn_next.isEnabled = false
+    btn_next.setOnClickListener {
       val viewPager = (activity as RegisterActivity).viewPager
       viewPager.currentItem += 1
     }
 
-    view.findViewById<TextView>(R.id.tv_cancel).setOnClickListener {
+    tv_cancel.setOnClickListener {
       activity?.finish()
     }
 
-    view.findViewById<EditText>(R.id.edit_policy1).keyListener = null
-    view.findViewById<EditText>(R.id.edit_policy2).keyListener = null
+    edit_policy1.loadUrl("https://voicereader-fe99d.firebaseapp.com/policy.html")
+    edit_policy2.loadUrl("https://voicereader-fe99d.firebaseapp.com/privacy_policy.html")
 
-    view.findViewById<AppCompatCheckBox>(R.id.cb_policy1).setOnCheckedChangeListener { _, b ->
+    cb_policy1.setOnCheckedChangeListener { _, b ->
       isCheckedPolicy1 = b
       handleChange()
     }
 
-    view.findViewById<AppCompatCheckBox>(R.id.cb_policy2).setOnCheckedChangeListener { _, b ->
+    cb_policy2.setOnCheckedChangeListener { _, b ->
       isCheckedPolicy2 = b
       handleChange()
     }

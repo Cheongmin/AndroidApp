@@ -55,24 +55,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="8dp"
-            android:text="1개"
-            android:textSize="18sp"
-            android:textColor="@color/colorGray9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="내 활동 점수"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/tv_action_point"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="8dp"
-            android:text="0점"
+            android:text="0개"
             android:textSize="18sp"
             android:textColor="@color/colorGray9" />
 

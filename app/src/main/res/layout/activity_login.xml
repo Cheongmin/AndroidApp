@@ -78,16 +78,16 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_navigate_find_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="비밀번호를 잃어버리셨나요?"
-        android:textColor="@color/colorGray6"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/layout_password"
-        app:layout_constraintTop_toBottomOf="@+id/layout_password" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_navigate_find_password"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="비밀번호를 잃어버리셨나요?"-->
+        <!--android:textColor="@color/colorGray6"-->
+        <!--android:textSize="12sp"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/layout_password"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/layout_password" />-->
 
     <Button
         android:id="@+id/btn_login"

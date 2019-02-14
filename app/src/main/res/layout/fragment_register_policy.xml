@@ -58,7 +58,7 @@
         app:layout_constraintStart_toEndOf="@+id/cb_policy1"
         app:layout_constraintTop_toTopOf="@+id/cb_policy1" />
 
-    <EditText
+    <WebView
         android:id="@+id/edit_policy1"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -66,12 +66,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
-        android:inputType="none"
-        android:scrollbars="vertical"
-        android:gravity="start"
-        android:text="안녕하세요"
-        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -99,7 +93,7 @@
         app:layout_constraintStart_toEndOf="@+id/cb_policy2"
         app:layout_constraintTop_toTopOf="@+id/cb_policy2" />
 
-    <EditText
+    <WebView
         android:id="@+id/edit_policy2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -107,12 +101,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
-        android:inputType="none"
-        android:scrollbars="vertical"
-        android:text="안녕하세요"
-        android:textSize="14sp"
-        android:gravity="start"
         app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintHorizontal_bias="1.0"
